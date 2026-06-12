@@ -17,37 +17,211 @@
   }
   html { scroll-behavior: smooth; }
   body { font-family: var(--font-body); background: var(--white); color: var(--black); overflow-x: hidden; font-size: 16px; line-height: 1.6; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2.5rem; background: rgba(10,10,10,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(184,150,12,0.2); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 2.5rem;
+    background: rgba(10,10,10,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(184,150,12,0.2);
+    border-top: 3px solid var(--gold);
+  }
   .nav-logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.06em; color: var(--white); }
   .nav-logo span { color: var(--gold); }
-  .nav-cta { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 0.6rem 1.4rem; text-decoration: none; transition: background 0.2s, transform 0.15s; }
+  .nav-cta {
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--black); background: var(--gold); padding: 0.6rem 1.4rem;
+    text-decoration: none; transition: background 0.2s, transform 0.15s;
+  }
   .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .hero { min-height: 100vh; background: var(--black); display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-top: 80px; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(184,150,12,0.04) 100%); pointer-events: none; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; background: var(--black);
+    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
+    padding-top: 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(184,150,12,0.04) 100%);
+    pointer-events: none;
+  }
   .hero-text { padding: 5rem 3rem 5rem 5rem; position: relative; z-index: 2; }
-  .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-eyebrow {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+    animation: fadeUp 0.6s ease both;
+  }
   .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
-  .hero-headline { font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem; }
+  .hero-headline {
+    font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 0.95; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
   .hero-headline .gold { color: var(--gold); }
-  .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(250,250,250,0.65); max-width: 420px; margin-bottom: 2.5rem; line-height: 1.7; }
+  .hero-sub {
+    font-size: 1.05rem; font-weight: 300; color: rgba(250,250,250,0.65);
+    max-width: 420px; margin-bottom: 2.5rem; line-height: 1.7;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
   .hero-sub strong { color: var(--white); font-weight: 500; }
-  .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-  .btn-primary { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1rem 2rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .hero-actions {
+    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
   .hero-note { font-size: 0.8rem; color: rgba(250,250,250,0.35); font-weight: 300; }
-  .hero-image { position: relative; height: 100vh; overflow: hidden; }
+
+  /* HERO STATS */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(250,250,250,0.08);
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding-right: 2.25rem;
+  }
+  .hero-stat:not(:last-child) {
+    border-right: 1px solid rgba(250,250,250,0.08);
+    margin-right: 2.25rem;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.68rem;
+    font-weight: 300;
+    color: rgba(250,250,250,0.35);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--black); background: var(--gold); padding: 1rem 2rem;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-primary .arrow { display: inline-block; margin-left: 0.4rem; transition: transform 0.2s ease; }
+  .btn-primary:hover .arrow { transform: translateX(4px); }
+
+  .btn-secondary {
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--gold); background: transparent; border: 1px solid rgba(184,150,12,0.5);
+    padding: 0.85rem 1.5rem; text-decoration: none; display: inline-block;
+    transition: background 0.2s, border-color 0.2s; align-self: flex-start;
+  }
+  .btn-secondary:hover { background: rgba(184,150,12,0.08); border-color: var(--gold); }
+  .btn-secondary .arrow { display: inline-block; margin-left: 0.4rem; transition: transform 0.2s ease; }
+  .btn-secondary:hover .arrow { transform: translateX(4px); }
+
+  /* HERO IMAGE */
+  .hero-image {
+    position: relative; height: 100vh; overflow: hidden;
+    clip-path: polygon(7% 0, 100% 0, 100% 100%, 0 100%);
+  }
   .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; filter: grayscale(20%) contrast(1.05); }
-  .hero-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--black) 0%, transparent 30%), linear-gradient(to top, var(--black) 0%, transparent 20%); }
+  .hero-image::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 30%), linear-gradient(to top, var(--black) 0%, transparent 20%);
+  }
+
+  /* MARQUEE STRIP */
+  .marquee-strip {
+    background: var(--gold);
+    padding: 0.65rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .marquee-track {
+    display: inline-flex;
+    animation: marquee-scroll 32s linear infinite;
+  }
+  .marquee-content {
+    display: inline-flex;
+    align-items: center;
+  }
+  .marquee-content span {
+    display: inline-block;
+    padding: 0 1.5rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+  }
+  .marquee-content .msep {
+    font-size: 0.45rem;
+    color: rgba(0,0,0,0.35);
+    padding: 0;
+  }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* PROBLEM */
   .problem { background: var(--black); padding: 6rem 5rem; border-top: 1px solid rgba(184,150,12,0.15); }
   .problem-inner { max-width: 900px; margin: 0 auto; }
-  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+  }
   .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-  .problem-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1; letter-spacing: 0.02em; color: var(--white); margin-bottom: 2rem; }
-  .problem-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
-  .problem-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1.25rem; border: 0.5px solid rgba(250,250,250,0.08); background: rgba(250,250,250,0.02); }
-  .problem-item::before { content: '—'; color: var(--gold); font-weight: 500; flex-shrink: 0; margin-top: 2px; }
-  .problem-item p { font-size: 0.95rem; color: rgba(250,250,250,0.7); font-weight: 300; line-height: 1.5; }
-  .problem-item p strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 2px; }
+  .problem-headline {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1; letter-spacing: 0.02em; color: var(--white); margin-bottom: 2rem;
+  }
+
+  /* Editorial numbered problem items */
+  .problem-items { margin-top: 2.5rem; }
+  .problem-item {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 2rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid rgba(250,250,250,0.06);
+    align-items: start;
+  }
+  .problem-item:last-child { border-bottom: 1px solid rgba(250,250,250,0.06); }
+  .problem-num {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--gold);
+    opacity: 0.28;
+    line-height: 1;
+    padding-top: 3px;
+    transition: opacity 0.25s;
+  }
+  .problem-item:hover .problem-num { opacity: 0.65; }
+  .problem-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+  .problem-text {
+    font-size: 0.88rem;
+    color: rgba(250,250,250,0.5);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* SOLUTION */
   .solution { background: var(--white); padding: 7rem 5rem; }
   .solution-inner { max-width: 1100px; margin: 0 auto; }
   .solution-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
@@ -56,12 +230,19 @@
   .solution-body { font-size: 1rem; font-weight: 300; color: var(--gray-500); line-height: 1.75; }
   .solution-body + .solution-body { margin-top: 1rem; }
   .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--gray-200); }
-  .pillar { padding: 2rem; border-right: 1px solid var(--gray-200); position: relative; }
+  .pillar {
+    padding: 2rem; border-right: 1px solid var(--gray-200); position: relative;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background: var(--white);
+  }
+  .pillar:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.09); z-index: 1; }
   .pillar:last-child { border-right: none; }
   .pillar-num { font-family: var(--font-display); font-size: 3rem; color: var(--gray-200); line-height: 1; margin-bottom: 0.5rem; }
   .pillar-title { font-size: 1rem; font-weight: 500; color: var(--black); margin-bottom: 0.5rem; }
   .pillar-desc { font-size: 0.88rem; color: var(--gray-500); font-weight: 300; line-height: 1.6; }
   .pillar-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); }
+
+  /* OFFER */
   .offer { background: var(--black); padding: 7rem 5rem; }
   .offer-inner { max-width: 1100px; margin: 0 auto; }
   .offer-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--white); margin-bottom: 3rem; }
@@ -85,21 +266,41 @@
   .pricing-option-includes { display: flex; flex-direction: column; gap: 0.4rem; }
   .pricing-option-item { font-size: 0.82rem; color: rgba(250,250,250,0.6); font-weight: 300; display: flex; gap: 0.5rem; align-items: flex-start; }
   .pricing-option-note { font-size: 0.75rem; color: rgba(250,250,250,0.3); font-weight: 300; font-style: italic; }
-  .btn-secondary { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); background: transparent; border: 1px solid rgba(184,150,12,0.5); padding: 0.85rem 1.5rem; text-decoration: none; display: inline-block; transition: background 0.2s, border-color 0.2s; align-self: flex-start; }
-  .btn-secondary:hover { background: rgba(184,150,12,0.08); border-color: var(--gold); }
   .pcheck { color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
   .payment-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,250,0.4); flex-shrink: 0; }
   .payment-methods { display: flex; gap: 1.25rem; flex-wrap: wrap; }
   .payment-method { font-size: 0.82rem; color: rgba(250,250,250,0.55); font-weight: 300; display: flex; align-items: center; gap: 0.35rem; }
   .payment-note { font-size: 0.78rem; color: rgba(250,250,250,0.3); font-weight: 300; margin-left: auto; }
+
+  /* ABOUT */
   .about { background: var(--white); padding: 7rem 5rem; }
   .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
   .about-image { position: relative; }
   .about-headline { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1; letter-spacing: 0.02em; color: var(--black); margin-bottom: 1.5rem; }
   .about-body { font-size: 0.95rem; font-weight: 300; color: var(--gray-500); line-height: 1.8; margin-bottom: 1rem; }
   .about-body strong { color: var(--black); font-weight: 500; }
-  .transformation-block { border: 0.5px solid var(--gray-200); overflow: hidden; }
+
+  /* Transformation image with gold corner bracket */
+  .transformation-block {
+    border: 0.5px solid var(--gray-200); overflow: hidden; position: relative;
+  }
   .transformation-block img { width: 100%; display: block; filter: none; }
+  .transformation-block::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 36px; height: 3px;
+    background: var(--gold);
+    z-index: 2;
+  }
+  .transformation-block::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 36px;
+    background: var(--gold);
+    z-index: 2;
+  }
+
+  /* FORWHO */
   .forwho { background: var(--gray-100); padding: 7rem 5rem; border-top: 1px solid var(--gray-200); }
   .forwho-inner { max-width: 1100px; margin: 0 auto; }
   .forwho-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--black); margin-bottom: 3rem; }
@@ -110,18 +311,29 @@
   .forwho-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--gray-500); font-weight: 300; line-height: 1.5; }
   .forwho-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
   .forwho-col.no .forwho-list li::before { content: '✕'; color: var(--gray-500); }
+
+  /* PROCESS */
   .process { background: var(--black); padding: 7rem 5rem; }
   .process-inner { max-width: 1100px; margin: 0 auto; }
   .process-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--white); margin-bottom: 3.5rem; }
   .process-step { padding: 0 1.5rem 0 0; }
-  .step-num { width: 40px; height: 40px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; color: var(--black); margin-bottom: 1.5rem; position: relative; z-index: 1; }
+  .step-num {
+    width: 40px; height: 40px; background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.2rem; color: var(--black);
+    margin-bottom: 1.5rem; position: relative; z-index: 1;
+  }
   .step-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
   .step-desc { font-size: 0.85rem; color: rgba(250,250,250,0.45); font-weight: 300; line-height: 1.6; }
+
+  /* CTA */
   .cta-section { background: linear-gradient(rgba(10,10,10,0.72), rgba(184,150,12,0.55)), url('hyroxRUN.png') center center / cover no-repeat; padding: 6rem 5rem; text-align: center; }
   .cta-inner { max-width: 700px; margin: 0 auto; }
   .cta-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; color: var(--white); line-height: 1; margin-bottom: 1rem; }
   .cta-sub { font-size: 1rem; font-weight: 300; color: rgba(250,250,250,0.75); margin-bottom: 2.5rem; line-height: 1.6; }
   .cta-fine { margin-top: 1.25rem; font-size: 0.8rem; }
+
+  /* FOOTER */
   footer { background: var(--black); padding: 2.5rem 5rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(184,150,12,0.15); }
   .footer-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--white); }
   .footer-logo span { color: var(--gold); }
@@ -131,20 +343,23 @@
   .footer-ig { font-size: 0.8rem; color: rgba(250,250,250,0.4); font-weight: 300; display: flex; align-items: center; gap: 0.5rem; }
   .footer-ig a { color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
   .ig-icon { width: 16px; height: 16px; fill: var(--gold); flex-shrink: 0; }
+
+  /* ANIMATIONS */
   @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-  .hero-headline { animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-text { padding: 5rem 1.5rem 3rem; }
-    .hero-image { height: 50vh; }
+    .hero-image { height: 50vh; clip-path: none; }
+    .hero-stats { flex-wrap: wrap; gap: 0.75rem 0; }
+    .hero-stat { padding-right: 1.5rem; }
+    .hero-stat:not(:last-child) { margin-right: 1.5rem; }
     .problem { padding: 4rem 1.5rem; }
-    .problem-list { grid-template-columns: 1fr; }
+    .problem-item { grid-template-columns: 3rem 1fr; gap: 1rem; }
     .solution { padding: 4rem 1.5rem; }
     .solution-top { grid-template-columns: 1fr; gap: 2rem; }
     .pillars { grid-template-columns: 1fr; }
@@ -177,8 +392,22 @@
     <h1 class="hero-headline">Stop<br>Starting<br><span class="gold">Over.</span></h1>
     <p class="hero-sub">You have tried before. You know what to do. The problem has never been information — it has been <strong>consistency.</strong> That is exactly what I build with you.</p>
     <div class="hero-actions">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for coaching</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for coaching <span class="arrow">→</span></a>
       <span class="hero-note">From $79 AUD · Early access coaching from $200/month</span>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">12+</div>
+        <div class="hero-stat-label">Years training</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">2</div>
+        <div class="hero-stat-label">Certifications</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Spots left</div>
+      </div>
     </div>
   </div>
   <div class="hero-image">
@@ -186,16 +415,61 @@
   </div>
 </section>
 
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-content">
+      <span>12+ years experience</span><span class="msep">◆</span>
+      <span>Cert III &amp; IV · Australia</span><span class="msep">◆</span>
+      <span>European personal training licence</span><span class="msep">◆</span>
+      <span>Online coaching · Worldwide</span><span class="msep">◆</span>
+      <span>Early access · 3 spots only</span><span class="msep">◆</span>
+      <span>From $79 AUD</span><span class="msep">◆</span>
+    </div>
+    <div class="marquee-content" aria-hidden="true">
+      <span>12+ years experience</span><span class="msep">◆</span>
+      <span>Cert III &amp; IV · Australia</span><span class="msep">◆</span>
+      <span>European personal training licence</span><span class="msep">◆</span>
+      <span>Online coaching · Worldwide</span><span class="msep">◆</span>
+      <span>Early access · 3 spots only</span><span class="msep">◆</span>
+      <span>From $79 AUD</span><span class="msep">◆</span>
+    </div>
+  </div>
+</div>
+
 <section class="problem">
   <div class="problem-inner">
     <p class="section-label">Sound familiar?</p>
     <h2 class="problem-headline">You are not the problem.<br>Your system is.</h2>
-    <ul class="problem-list reveal">
-      <li class="problem-item"><p><strong>You have started before</strong>You went hard for a few weeks, saw some progress, then life happened and you stopped completely.</p></li>
-      <li class="problem-item"><p><strong>Motivation is not enough</strong>You feel motivated on Monday. By Thursday something gets in the way. You rely on feeling like it — and that never lasts.</p></li>
-      <li class="problem-item"><p><strong>You eat well — sometimes</strong>Monday to Thursday you are on it. The weekend undoes everything. You have no system that survives a difficult week.</p></li>
-      <li class="problem-item"><p><strong>Nobody is paying attention</strong>You train alone, check in with nobody, and have no external accountability. When you skip — nothing happens.</p></li>
-    </ul>
+    <div class="problem-items reveal">
+      <div class="problem-item">
+        <div class="problem-num">01</div>
+        <div class="problem-content">
+          <span class="problem-title">You have started before</span>
+          <p class="problem-text">You went hard for a few weeks, saw some progress, then life happened and you stopped completely.</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">02</div>
+        <div class="problem-content">
+          <span class="problem-title">Motivation is not enough</span>
+          <p class="problem-text">You feel motivated on Monday. By Thursday something gets in the way. You rely on feeling like it — and that never lasts.</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">03</div>
+        <div class="problem-content">
+          <span class="problem-title">You eat well — sometimes</span>
+          <p class="problem-text">Monday to Thursday you are on it. The weekend undoes everything. You have no system that survives a difficult week.</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-num">04</div>
+        <div class="problem-content">
+          <span class="problem-title">Nobody is paying attention</span>
+          <p class="problem-text">You train alone, check in with nobody, and have no external accountability. When you skip — nothing happens.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -246,7 +520,7 @@
             <div class="pricing-option-item"><span class="pcheck">✓</span>Exercise video library access</div>
             <div class="pricing-option-item"><span class="pcheck">✓</span>Progress tracking sheet</div>
           </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-secondary" target="_blank">Get the program</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-secondary" target="_blank">Get the program <span class="arrow">→</span></a>
           <p class="pricing-option-note" style="margin-top:0.5rem;">Complete a short onboarding form.</p>
         </div>
         <div class="pricing-option featured">
@@ -264,7 +538,7 @@
             <div class="pricing-option-item"><span class="pcheck">✓</span>Program adjusted every 4 weeks based on your progress</div>
           </div>
           <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:0.25rem;">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for a spot</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for a spot <span class="arrow">→</span></a>
             <span style="font-size:0.78rem;color:rgba(250,250,250,0.3)">Limited spots available</span>
           </div>
           <p class="pricing-option-note" style="margin-top:0.25rem;">Complete a short form, and I will reach out to book a call.</p>
@@ -334,10 +608,9 @@
     <p class="section-label">How it works</p>
     <h2 class="process-headline">Simple from day one.</h2>
 
-    <!-- PROGRAM ONLY -->
     <div style="margin-top:3rem;">
       <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(184,150,12,0.2);">Program only</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="reveal">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="reveal process-two-col">
         <div style="position:absolute;top:1.25rem;left:1.25rem;right:1.25rem;height:1px;background:rgba(184,150,12,0.3);"></div>
         <div class="process-step">
           <div class="step-num">1</div>
@@ -357,10 +630,9 @@
       </div>
     </div>
 
-    <!-- FULL COACHING -->
     <div style="margin-top:4rem;">
       <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(184,150,12,0.2);">Full coaching</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="reveal">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="reveal process-two-col">
         <div style="position:absolute;top:1.25rem;left:1.25rem;right:1.25rem;height:1px;background:rgba(184,150,12,0.3);"></div>
         <div class="process-step">
           <div class="step-num">1</div>
@@ -392,7 +664,7 @@
   <div class="cta-inner reveal">
     <h2 class="cta-headline">Ready to stop starting over?</h2>
     <p class="cta-sub">Early access coaching from $200 AUD/month. Or get the program only for $79. Fill in the form — it takes 5 minutes and costs nothing.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply now</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply now <span class="arrow">→</span></a>
     <p class="cta-fine" style="color: rgba(250,250,250,0.45);">Online coaching · Available worldwide</p>
   </div>
 </section>
