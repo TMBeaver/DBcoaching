@@ -7,275 +7,897 @@
 <meta name="description" content="Online personal coaching for people who keep starting over. Build the consistency to train, eat right and transform your body.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0A0A0A; --white: #FAFAFA; --gold: #B8960C; --gold-light: #D4AE2A;
-    --gray-100: #F4F4F4; --gray-200: #E0E0E0; --gray-500: #6B7280; --gray-800: #1E1E1E;
-    --font-display: 'Bebas Neue', sans-serif; --font-body: 'DM Sans', sans-serif;
-  }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); background: var(--white); color: var(--black); overflow-x: hidden; font-size: 16px; line-height: 1.6; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2.5rem; background: rgba(10,10,10,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(184,150,12,0.2); }
-  .nav-logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.06em; color: var(--white); }
-  .nav-logo span { color: var(--gold); }
-  .nav-cta { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 0.6rem 1.4rem; text-decoration: none; transition: background 0.2s, transform 0.15s; }
-  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .hero { min-height: 100vh; background: var(--black); display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-top: 80px; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(184,150,12,0.04) 100%); pointer-events: none; }
-  .hero-text { padding: 5rem 3rem 5rem 5rem; position: relative; z-index: 2; }
-  .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
-  .hero-headline { font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem; }
-  .hero-headline .gold { color: var(--gold); }
-  .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(250,250,250,0.65); max-width: 420px; margin-bottom: 2.5rem; line-height: 1.7; }
-  .hero-sub strong { color: var(--white); font-weight: 500; }
-  .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-  .btn-primary { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1rem 2rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .hero-note { font-size: 0.8rem; color: rgba(250,250,250,0.35); font-weight: 300; }
-  .hero-image { position: relative; height: 100vh; overflow: hidden; }
-  .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; filter: grayscale(20%) contrast(1.05); }
-  .hero-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--black) 0%, transparent 30%), linear-gradient(to top, var(--black) 0%, transparent 20%); }
-  .problem { background: var(--black); padding: 6rem 5rem; border-top: 1px solid rgba(184,150,12,0.15); }
-  .problem-inner { max-width: 900px; margin: 0 auto; }
-  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-  .problem-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1; letter-spacing: 0.02em; color: var(--white); margin-bottom: 2rem; }
-  .problem-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
-  .problem-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1.25rem; border: 0.5px solid rgba(250,250,250,0.08); background: rgba(250,250,250,0.02); }
-  .problem-item::before { content: '—'; color: var(--gold); font-weight: 500; flex-shrink: 0; margin-top: 2px; }
-  .problem-item p { font-size: 0.95rem; color: rgba(250,250,250,0.7); font-weight: 300; line-height: 1.5; }
-  .problem-item p strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 2px; }
-  .solution { background: var(--white); padding: 7rem 5rem; }
-  .solution-inner { max-width: 1100px; margin: 0 auto; }
-  .solution-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
-  .solution-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1; letter-spacing: 0.02em; color: var(--black); margin-bottom: 1.25rem; }
-  .solution-headline span { color: var(--gold); }
-  .solution-body { font-size: 1rem; font-weight: 300; color: var(--gray-500); line-height: 1.75; }
-  .solution-body + .solution-body { margin-top: 1rem; }
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--gray-200); }
-  .pillar { padding: 2rem; border-right: 1px solid var(--gray-200); position: relative; }
-  .pillar:last-child { border-right: none; }
-  .pillar-num { font-family: var(--font-display); font-size: 3rem; color: var(--gray-200); line-height: 1; margin-bottom: 0.5rem; }
-  .pillar-title { font-size: 1rem; font-weight: 500; color: var(--black); margin-bottom: 0.5rem; }
-  .pillar-desc { font-size: 0.88rem; color: var(--gray-500); font-weight: 300; line-height: 1.6; }
-  .pillar-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); }
-  .offer { background: var(--black); padding: 7rem 5rem; }
-  .offer-inner { max-width: 1100px; margin: 0 auto; }
-  .offer-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--white); margin-bottom: 3rem; }
-  .offer-headline span { color: var(--gold); }
-  .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(250,250,250,0.08); }
-  .offer-item { background: var(--black); padding: 2rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: background 0.2s; }
-  .offer-item:hover { background: rgba(184,150,12,0.04); }
-  .offer-icon { width: 40px; height: 40px; background: rgba(184,150,12,0.12); border: 0.5px solid rgba(184,150,12,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .offer-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .offer-item-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.35rem; }
-  .offer-item-desc { font-size: 0.85rem; color: rgba(250,250,250,0.5); font-weight: 300; line-height: 1.6; }
-  .offer-price { margin-top: 3rem; }
-  .pricing-options { display: grid; grid-template-columns: 1fr 2fr; gap: 1px; background: rgba(184,150,12,0.2); margin-top: 3rem; }
-  .pricing-option { background: var(--black); padding: 2rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
-  .pricing-option.featured { background: rgba(184,150,12,0.03); border: 1px solid rgba(184,150,12,0.4); }
-  .pricing-option-tag { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
-  .pricing-option-name { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--white); line-height: 1; }
-  .pricing-option-price { font-family: var(--font-display); font-size: 2.8rem; color: var(--white); line-height: 1; }
-  .pricing-option-price span { font-family: var(--font-body); font-size: 0.9rem; color: var(--gray-500); font-weight: 300; }
-  .pricing-option-desc { font-size: 0.85rem; color: rgba(250,250,250,0.5); font-weight: 300; line-height: 1.6; flex: 1; }
-  .pricing-option-includes { display: flex; flex-direction: column; gap: 0.4rem; }
-  .pricing-option-item { font-size: 0.82rem; color: rgba(250,250,250,0.6); font-weight: 300; display: flex; gap: 0.5rem; align-items: flex-start; }
-  .pricing-option-note { font-size: 0.75rem; color: rgba(250,250,250,0.3); font-weight: 300; font-style: italic; }
-  .btn-secondary { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); background: transparent; border: 1px solid rgba(184,150,12,0.5); padding: 0.85rem 1.5rem; text-decoration: none; display: inline-block; transition: background 0.2s, border-color 0.2s; align-self: flex-start; }
-  .btn-secondary:hover { background: rgba(184,150,12,0.08); border-color: var(--gold); }
-  .pcheck { color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
-  .payment-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,250,0.4); flex-shrink: 0; }
-  .payment-methods { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-  .payment-method { font-size: 0.82rem; color: rgba(250,250,250,0.55); font-weight: 300; display: flex; align-items: center; gap: 0.35rem; }
-  .payment-note { font-size: 0.78rem; color: rgba(250,250,250,0.3); font-weight: 300; margin-left: auto; }
-  .about { background: var(--white); padding: 7rem 5rem; }
-  .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-  .about-image { position: relative; }
-  .about-headline { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1; letter-spacing: 0.02em; color: var(--black); margin-bottom: 1.5rem; }
-  .about-body { font-size: 0.95rem; font-weight: 300; color: var(--gray-500); line-height: 1.8; margin-bottom: 1rem; }
-  .about-body strong { color: var(--black); font-weight: 500; }
-  .transformation-block { border: 0.5px solid var(--gray-200); overflow: hidden; }
-  .transformation-block img { width: 100%; display: block; filter: none; }
-  .forwho { background: var(--gray-100); padding: 7rem 5rem; border-top: 1px solid var(--gray-200); }
-  .forwho-inner { max-width: 1100px; margin: 0 auto; }
-  .forwho-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--black); margin-bottom: 3rem; }
-  .forwho-headline span { color: var(--gold); }
-  .forwho-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .forwho-col h3 { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
-  .forwho-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-  .forwho-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--gray-500); font-weight: 300; line-height: 1.5; }
-  .forwho-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
-  .forwho-col.no .forwho-list li::before { content: '✕'; color: var(--gray-500); }
-  .process { background: var(--black); padding: 7rem 5rem; }
-  .process-inner { max-width: 1100px; margin: 0 auto; }
-  .process-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--white); margin-bottom: 3.5rem; }
-  .process-step { padding: 0 1.5rem 0 0; }
-  .step-num { width: 40px; height: 40px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; color: var(--black); margin-bottom: 1.5rem; position: relative; z-index: 1; }
-  .step-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
-  .step-desc { font-size: 0.85rem; color: rgba(250,250,250,0.45); font-weight: 300; line-height: 1.6; }
-  .cta-section { background: linear-gradient(rgba(10,10,10,0.72), rgba(184,150,12,0.55)), url('hyroxRUN.png') center center / cover no-repeat; padding: 6rem 5rem; text-align: center; }
-  .cta-inner { max-width: 700px; margin: 0 auto; }
-  .cta-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; color: var(--white); line-height: 1; margin-bottom: 1rem; }
-  .cta-sub { font-size: 1rem; font-weight: 300; color: rgba(250,250,250,0.75); margin-bottom: 2.5rem; line-height: 1.6; }
-  .cta-fine { margin-top: 1.25rem; font-size: 0.8rem; }
-  footer { background: var(--black); padding: 2.5rem 5rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(184,150,12,0.15); }
-  .footer-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--white); }
-  .footer-logo span { color: var(--gold); }
-  .footer-links { display: flex; gap: 2rem; }
-  .footer-links a { font-size: 0.8rem; color: rgba(250,250,250,0.4); text-decoration: none; font-weight: 300; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-ig { font-size: 0.8rem; color: rgba(250,250,250,0.4); font-weight: 300; display: flex; align-items: center; gap: 0.5rem; }
-  .footer-ig a { color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
-  .ig-icon { width: 16px; height: 16px; fill: var(--gold); flex-shrink: 0; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-  .hero-headline { animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-text { padding: 5rem 1.5rem 3rem; }
-    .hero-image { height: 50vh; }
-    .problem { padding: 4rem 1.5rem; }
-    .problem-list { grid-template-columns: 1fr; }
-    .solution { padding: 4rem 1.5rem; }
-    .solution-top { grid-template-columns: 1fr; gap: 2rem; }
-    .pillars { grid-template-columns: 1fr; }
-    .pillar { border-right: none; border-bottom: 1px solid var(--gray-200); }
-    .offer { padding: 4rem 1.5rem; }
-    .offer-grid { grid-template-columns: 1fr; }
-    .about { padding: 4rem 1.5rem; }
-    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .forwho { padding: 4rem 1.5rem; }
-    .forwho-grid { grid-template-columns: 1fr; }
-    .process { padding: 4rem 1.5rem; }
-    .pricing-options { grid-template-columns: 1fr; }
-    .process-two-col { grid-template-columns: 1fr !important; gap: 3rem !important; }
-    .cta-section { padding: 4rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0A0A0A;
+  --white: #FAFAFA;
+  --gold: #B8960C;
+  --gold-light: #D4AE2A;
+  --gray-100: #F0F0EE;
+  --gray-200: #DCDCDC;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body: 'Barlow', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--white);
+  color: var(--black);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: rgba(10,10,10,0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(184,150,12,0.15);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--white);
+}
+.nav-logo em { color: var(--gold); font-style: normal; }
+.nav-cta {
+  font-family: var(--font-body);
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--black); background: var(--gold);
+  padding: 0.6rem 1.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--gold-light); }
+
+/* ─── HERO ────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding-top: 64px;
+}
+.hero-photo {
+  position: absolute;
+  top: 0; right: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  filter: grayscale(15%) contrast(1.08);
+}
+.hero-photo::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to right, var(--black) 0%, transparent 55%),
+    linear-gradient(to top, var(--black) 0%, transparent 25%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 5rem 5rem 5rem 5rem;
+  max-width: 720px;
+}
+.hero-tag {
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.75rem;
+}
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 10.5vw, 11rem);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 2.25rem;
+}
+.hero-headline .gold { color: var(--gold); }
+.hero-sub {
+  font-size: 1.05rem; font-weight: 300;
+  color: rgba(250,250,250,0.6);
+  max-width: 400px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--black); background: var(--gold);
+  padding: 0.95rem 2rem;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.hero-note {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 0.78rem; font-weight: 300;
+  color: rgba(250,250,250,0.28);
+}
+
+/* ─── PROBLEMS ────────────────────────────────────────── */
+.problems {
+  background: var(--black);
+  padding: 7rem 5rem;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.problems-inner { max-width: 1000px; margin: 0 auto; }
+.section-tag {
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 3rem;
+  display: block;
+}
+.problems-deck { list-style: none; }
+.problems-deck li {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: rgba(250,250,250,0.72);
+  padding: 1.6rem 0;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  letter-spacing: 0.01em;
+  cursor: default;
+  transition: color 0.2s;
+}
+.problems-deck li:last-child { border-bottom: 1px solid rgba(255,255,255,0.07); }
+.problems-deck li:hover { color: var(--white); }
+.problems-deck li span {
+  color: rgba(250,250,250,0.28);
+  font-size: 0.85em;
+  font-weight: 600;
+  margin-right: 0.75rem;
+}
+
+/* ─── APPROACH ────────────────────────────────────────── */
+.approach {
+  background: var(--white);
+  padding: 8rem 5rem;
+}
+.approach-inner { max-width: 1100px; margin: 0 auto; }
+.approach-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+.approach-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: var(--black);
+}
+.approach-headline em { color: var(--gold); font-style: normal; }
+.approach-body {
+  font-size: 1rem; font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.8;
+}
+.approach-body + .approach-body { margin-top: 1rem; }
+
+/* Stacked pillar rows */
+.pillars { display: flex; flex-direction: column; }
+.pillar-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--gray-200);
+  align-items: start;
+}
+.pillar-row:last-child { border-bottom: 1px solid var(--gray-200); }
+.pillar-n {
+  font-family: var(--font-display);
+  font-size: 3.5rem; font-weight: 800;
+  color: var(--gray-200);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  padding-top: 3px;
+}
+.pillar-title {
+  font-size: 1rem; font-weight: 500;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.01em;
+}
+.pillar-desc {
+  font-size: 0.9rem; font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+/* ─── OFFER & PRICING ─────────────────────────────────── */
+.offer {
+  background: var(--black);
+  padding: 8rem 5rem;
+}
+.offer-inner { max-width: 1100px; margin: 0 auto; }
+.offer-header {
+  margin-bottom: 4.5rem;
+}
+.offer-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--white);
+}
+.offer-headline em { color: var(--gold); font-style: normal; }
+
+/* Clean feature list (no icon boxes) */
+.features-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 4.5rem;
+}
+.feature-item {
+  padding: 1.75rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.feature-item:nth-child(3n) { border-right: none; }
+.feature-item:nth-last-child(-n+3) { border-bottom: none; }
+.feature-name {
+  font-size: 0.88rem; font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+.feature-desc {
+  font-size: 0.82rem; font-weight: 300;
+  color: rgba(250,250,250,0.42);
+  line-height: 1.6;
+}
+
+/* Pricing rows */
+.pricing { border-top: 1px solid rgba(184,150,12,0.2); }
+.pricing-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 3rem 0;
+  border-bottom: 1px solid rgba(184,150,12,0.12);
+  align-items: start;
+}
+.pricing-row.is-featured { background: none; }
+.pricing-left {}
+.pricing-tag {
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.pricing-name {
+  font-family: var(--font-display);
+  font-size: 2rem; font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+.pricing-price {
+  font-family: var(--font-display);
+  font-size: 3rem; font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.pricing-price small {
+  font-family: var(--font-body);
+  font-size: 0.85rem; font-weight: 300;
+  color: var(--gray-400);
+  margin-left: 0.35rem;
+}
+.pricing-desc {
+  margin-top: 1rem;
+  font-size: 0.88rem; font-weight: 300;
+  color: rgba(250,250,250,0.45);
+  line-height: 1.65;
+}
+.pricing-right {}
+.pricing-includes {
+  display: flex; flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+.pricing-includes li {
+  list-style: none;
+  font-size: 0.85rem; font-weight: 300;
+  color: rgba(250,250,250,0.6);
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  line-height: 1.5;
+}
+.pricing-includes li .ck {
+  color: var(--gold);
+  font-weight: 600;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  margin-top: 1px;
+}
+.pricing-note {
+  font-size: 0.72rem; font-weight: 300;
+  color: rgba(250,250,250,0.22);
+  font-style: italic;
+  margin-top: 0.75rem;
+}
+.btn-secondary {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.78rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(184,150,12,0.45);
+  padding: 0.8rem 1.5rem;
+  text-decoration: none; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-secondary:hover { border-color: var(--gold); background: rgba(184,150,12,0.07); }
+.btn-secondary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.pricing-payment {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.pricing-payment-label {
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: rgba(250,250,250,0.28);
+}
+.pricing-payment-item {
+  font-size: 0.78rem; font-weight: 300;
+  color: rgba(250,250,250,0.38);
+  display: flex; align-items: center; gap: 0.3rem;
+}
+.pay-icon {
+  width: 13px; height: 13px;
+  stroke: rgba(250,250,250,0.38);
+  fill: none; stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+/* ─── ABOUT ───────────────────────────────────────────── */
+.about {
+  background: var(--white);
+  padding: 0;
+  overflow: hidden;
+}
+.about-inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  min-height: 680px;
+}
+.about-photo {
+  position: relative;
+  overflow: hidden;
+}
+.about-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(10%) contrast(1.04);
+}
+.about-text {
+  padding: 6rem 5rem 6rem 5.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.about-tag {
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.about-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--black);
+  margin-bottom: 2rem;
+}
+.about-body {
+  font-size: 0.95rem; font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+.about-body strong { color: var(--black); font-weight: 500; }
+.about-creds {
+  display: flex; gap: 2rem;
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--gray-200);
+  flex-wrap: wrap;
+}
+.about-cred {
+  font-size: 0.75rem; font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.5;
+}
+.about-cred strong {
+  display: block;
+  font-weight: 500;
+  color: var(--black);
+  font-size: 0.82rem;
+}
+
+/* ─── FORWHO ──────────────────────────────────────────── */
+.forwho {
+  background: var(--black);
+  padding: 8rem 5rem;
+}
+.forwho-inner { max-width: 1100px; margin: 0 auto; }
+.forwho-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--white);
+  margin-bottom: 4rem;
+  letter-spacing: 0.01em;
+}
+.forwho-headline em { color: var(--gold); font-style: normal; }
+.forwho-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.forwho-col {
+  padding: 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.forwho-col:last-child { border-right: none; }
+.forwho-col h3 {
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.forwho-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.forwho-list li {
+  font-size: 0.92rem; font-weight: 300;
+  color: rgba(250,250,250,0.6);
+  line-height: 1.55;
+  padding-left: 1.25rem;
+  position: relative;
+}
+.forwho-list li::before {
+  content: '✓';
+  position: absolute; left: 0;
+  color: var(--gold);
+  font-size: 0.8rem; font-weight: 600;
+  top: 1px;
+}
+.forwho-col.no .forwho-list li::before {
+  content: '—';
+  color: rgba(250,250,250,0.2);
+  font-weight: 300;
+}
+
+/* ─── PROCESS ─────────────────────────────────────────── */
+.process {
+  background: var(--white);
+  padding: 8rem 5rem;
+}
+.process-inner { max-width: 1100px; margin: 0 auto; }
+.process-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 4.5rem;
+  padding-bottom: 3.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+.process-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--black);
+  letter-spacing: 0.01em;
+}
+.process-subhead {
+  font-size: 0.95rem; font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.75;
+}
+.process-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+}
+.process-track-label {
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(184,150,12,0.2);
+  display: block;
+}
+.process-steps { display: flex; flex-direction: column; }
+.process-step {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--gray-200);
+  align-items: start;
+}
+.process-step:last-child { border-bottom: 1px solid var(--gray-200); }
+.step-n {
+  font-family: var(--font-display);
+  font-size: 1.4rem; font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  opacity: 0.5;
+  padding-top: 2px;
+}
+.step-title {
+  font-size: 0.9rem; font-weight: 500;
+  color: var(--black);
+  margin-bottom: 0.3rem;
+}
+.step-desc {
+  font-size: 0.83rem; font-weight: 300;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+/* ─── CTA ─────────────────────────────────────────────── */
+.cta-section {
+  background: var(--black);
+  padding: 9rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('hyroxRUN.png') center 35% / cover no-repeat;
+  opacity: 0.08;
+}
+.cta-inner {
+  position: relative; z-index: 1;
+  max-width: 800px;
+}
+.cta-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 7.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.9;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  margin-bottom: 1.75rem;
+}
+.cta-headline em { color: var(--gold); font-style: normal; }
+.cta-sub {
+  font-size: 1rem; font-weight: 300;
+  color: rgba(250,250,250,0.55);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 2.75rem;
+}
+.cta-fine {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 0.75rem; font-weight: 300;
+  color: rgba(250,250,250,0.22);
+  letter-spacing: 0.05em;
+}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer {
+  background: var(--black);
+  padding: 2rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--white);
+}
+.footer-logo em { color: var(--gold); font-style: normal; }
+.footer-links { display: flex; gap: 2rem; }
+.footer-links a {
+  font-size: 0.78rem; font-weight: 300;
+  color: rgba(250,250,250,0.3);
+  text-decoration: none;
+  transition: color 0.2s; cursor: pointer;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-ig {
+  font-size: 0.78rem; font-weight: 300;
+  color: rgba(250,250,250,0.3);
+}
+.footer-ig a {
+  color: rgba(250,250,250,0.5);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.4rem;
+  transition: color 0.2s; cursor: pointer;
+}
+.footer-ig a:hover { color: var(--gold); }
+.ig-icon { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+/* ─── ANIMATIONS ──────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-tag     { animation: fadeUp 0.5s ease both; }
+.hero-headline { animation: fadeUp 0.5s 0.08s ease both; }
+.hero-sub     { animation: fadeUp 0.5s 0.16s ease both; }
+.hero-actions { animation: fadeUp 0.5s 0.24s ease both; }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ─── ACCESSIBILITY ───────────────────────────────────── */
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+a, button { cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ─── MOBILE ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+
+  .hero { display: block; padding-top: 64px; }
+  .hero-photo { position: relative; width: 100%; height: 55vw; }
+  .hero-photo::before { background: linear-gradient(to top, var(--black) 0%, transparent 40%); }
+  .hero-content { padding: 2.5rem 1.5rem 4rem; max-width: none; }
+  .hero-headline { font-size: clamp(3.5rem, 14vw, 6rem); }
+
+  .problems { padding: 5rem 1.5rem; }
+  .problems-deck li { font-size: clamp(1.4rem, 4vw, 2rem); }
+
+  .approach { padding: 5rem 1.5rem; }
+  .approach-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; padding-bottom: 3rem; }
+  .pillar-row { grid-template-columns: 3.5rem 1fr; gap: 1.25rem; }
+
+  .offer { padding: 5rem 1.5rem; }
+  .features-list { grid-template-columns: 1fr 1fr; }
+  .features-list .feature-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.06); }
+  .features-list .feature-item:nth-child(even) { border-right: none; }
+  .features-list .feature-item { border-bottom: 1px solid rgba(255,255,255,0.06) !important; }
+  .pricing-row { grid-template-columns: 1fr; gap: 2rem; }
+
+  .about-inner { grid-template-columns: 1fr; }
+  .about-photo { height: 65vw; }
+  .about-text { padding: 4rem 1.5rem; }
+  .about-creds { gap: 1.5rem; }
+
+  .forwho { padding: 5rem 1.5rem; }
+  .forwho-grid { grid-template-columns: 1fr; }
+  .forwho-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 2rem 0; }
+  .forwho-col:last-child { border-bottom: none; }
+
+  .process { padding: 5rem 1.5rem; }
+  .process-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; padding-bottom: 3rem; }
+  .process-cols { grid-template-columns: 1fr; gap: 3.5rem; }
+
+  .cta-section { padding: 6rem 1.5rem; }
+  .cta-headline { font-size: clamp(3rem, 12vw, 5rem); }
+
+  footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1.25rem; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">DB <span>Coaching</span></div>
+  <div class="nav-logo">DB <em>Coaching</em></div>
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="nav-cta" target="_blank">Apply now</a>
 </nav>
 
+<!-- ── HERO ─────────────────────────────────────────────── -->
 <section class="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Online Personal Coaching</p>
+  <div class="hero-photo">
+    <img src="hyroxrow.png" alt="Dalius Butkus — DB Coaching">
+  </div>
+  <div class="hero-content">
+    <p class="hero-tag">Online Personal Coaching</p>
     <h1 class="hero-headline">Stop<br>Starting<br><span class="gold">Over.</span></h1>
     <p class="hero-sub">You have tried before. You know what to do. The problem has never been information — it has been <strong>consistency.</strong> That is exactly what I build with you.</p>
     <div class="hero-actions">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for coaching</a>
-      <span class="hero-note">From $79 AUD · Early access coaching from $200/month</span>
+      <span class="hero-note">From $79 AUD &middot; Full coaching from $200/month</span>
     </div>
-  </div>
-  <div class="hero-image">
-    <img src="hyroxrow.png" alt="Dalius Butkus — DB Coaching">
   </div>
 </section>
 
-<section class="problem">
-  <div class="problem-inner">
-    <p class="section-label">Sound familiar?</p>
-    <h2 class="problem-headline">You are not the problem.<br>Your system is.</h2>
-    <ul class="problem-list reveal">
-      <li class="problem-item"><p><strong>You have started before</strong>You went hard for a few weeks, saw some progress, then life happened and you stopped completely.</p></li>
-      <li class="problem-item"><p><strong>Motivation is not enough</strong>You feel motivated on Monday. By Thursday something gets in the way. You rely on feeling like it — and that never lasts.</p></li>
-      <li class="problem-item"><p><strong>You eat well — sometimes</strong>Monday to Thursday you are on it. The weekend undoes everything. You have no system that survives a difficult week.</p></li>
-      <li class="problem-item"><p><strong>Nobody is paying attention</strong>You train alone, check in with nobody, and have no external accountability. When you skip — nothing happens.</p></li>
+<!-- ── PROBLEMS ──────────────────────────────────────────── -->
+<section class="problems">
+  <div class="problems-inner">
+    <span class="section-tag">Sound familiar?</span>
+    <ul class="problems-deck reveal">
+      <li><span>01</span>You started. You went hard. Then life happened and you stopped.</li>
+      <li><span>02</span>You rely on motivation. Motivation doesn't show up every Thursday.</li>
+      <li><span>03</span>Monday to Thursday you're on it. The weekend undoes everything.</li>
+      <li><span>04</span>You train alone. Nobody notices when you skip. Nothing happens.</li>
     </ul>
   </div>
 </section>
 
-<section class="solution">
-  <div class="solution-inner">
-    <div class="solution-top reveal">
+<!-- ── APPROACH ──────────────────────────────────────────── -->
+<section class="approach" id="offer">
+  <div class="approach-inner">
+    <div class="approach-header reveal">
+      <h2 class="approach-headline">A system built<br>around <em>your</em> life.</h2>
       <div>
-        <p class="section-label" style="color: var(--gold);">The approach</p>
-        <h2 class="solution-headline">A system built around <span>your</span> life.</h2>
-      </div>
-      <div>
-        <p class="solution-body">I do not hand you a generic meal plan and a cookie-cutter program. Before we change anything, I look at what you already eat and how you already move — and we build from there.</p>
-        <p class="solution-body">Most clients see results just from fixing two or three specific things. No complete overhaul required.</p>
+        <p class="approach-body">I do not hand you a generic meal plan and a cookie-cutter program. Before we change anything, I look at what you already eat and how you already move — and we build from there.</p>
+        <p class="approach-body">Most clients see results just from fixing two or three specific things. No complete overhaul required.</p>
       </div>
     </div>
     <div class="pillars reveal">
-      <div class="pillar"><div class="pillar-accent"></div><div class="pillar-num">01</div><div class="pillar-title">Training that progresses</div><p class="pillar-desc">A fully personalised program with video guides for every exercise — built around your schedule and goals. You always know what to do and exactly how to do it.</p></div>
-      <div class="pillar"><div class="pillar-accent"></div><div class="pillar-num">02</div><div class="pillar-title">Nutrition that fits real life</div><p class="pillar-desc">No banned foods. No calorie obsession. A clear framework built around what you already eat — improved, not replaced.</p></div>
-      <div class="pillar"><div class="pillar-accent"></div><div class="pillar-num">03</div><div class="pillar-title">Accountability every week</div><p class="pillar-desc">Weekly check-ins where I actually read what you write and respond specifically to your week. You are never coaching alone.</p></div>
+      <div class="pillar-row">
+        <div class="pillar-n">01</div>
+        <div>
+          <div class="pillar-title">Training that progresses</div>
+          <p class="pillar-desc">A fully personalised program with video guides for every exercise — built around your schedule and goals. You always know what to do and exactly how to do it.</p>
+        </div>
+      </div>
+      <div class="pillar-row">
+        <div class="pillar-n">02</div>
+        <div>
+          <div class="pillar-title">Nutrition that fits real life</div>
+          <p class="pillar-desc">No banned foods. No calorie obsession. A clear framework built around what you already eat — improved, not replaced.</p>
+        </div>
+      </div>
+      <div class="pillar-row">
+        <div class="pillar-n">03</div>
+        <div>
+          <div class="pillar-title">Accountability every week</div>
+          <p class="pillar-desc">Weekly check-ins where I actually read what you write and respond specifically to your week. You are never coaching alone.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="offer" id="offer">
+<!-- ── OFFER & PRICING ───────────────────────────────────── -->
+<section class="offer">
   <div class="offer-inner">
-    <p class="section-label">What is included</p>
-    <h2 class="offer-headline">Everything you need.<br><span>Nothing you don't.</span></h2>
-    <div class="offer-grid reveal">
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg></div><div><div class="offer-item-title">Personalised training program</div><p class="offer-item-desc">Built around your schedule, your gym, and your goal. Days, exercises and intensity — all tailored to you. Adjusted as you progress.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/></svg></div><div><div class="offer-item-title">Weekly check-in</div><p class="offer-item-desc">Training, nutrition, sleep, energy and mindset — reviewed every week. You get a personalised response within 72 hours.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div><div><div class="offer-item-title">Nutrition blueprint</div><p class="offer-item-desc">A practical framework that explains the why behind every decision. Not a meal plan — a system that works with real life.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="offer-item-title">Exercise video library</div><p class="offer-item-desc">Every exercise filmed and explained. You always know exactly how each movement should look and feel.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="offer-item-title">Direct coach access</div><p class="offer-item-desc">Message me directly whenever you need to. Questions answered within 24 hours. You are never on your own.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="offer-item-title">Progress tracking</div><p class="offer-item-desc">Track your weight and reps every session across 12 weeks. You can see exactly how much stronger you are getting.</p></div></div>
+    <div class="offer-header reveal">
+      <h2 class="offer-headline">Everything you need.<br><em>Nothing you don't.</em></h2>
     </div>
-    <div class="offer-price reveal">
-      <div class="pricing-options">
-        <div class="pricing-option">
-          <div>
-            <div class="pricing-option-tag">Self-guided</div>
-            <div class="pricing-option-name">Program Only</div>
-          </div>
-          <div class="pricing-option-price">$79 <span>AUD one-time</span></div>
-          <p class="pricing-option-desc">For people who are self-motivated and just need a clear, structured plan to follow. No coaching — just the tools.</p>
-          <div class="pricing-option-includes">
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Personalised training program</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Nutrition blueprint</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Exercise video library access</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Progress tracking sheet</div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-secondary" target="_blank">Get the program</a>
-          <p class="pricing-option-note" style="margin-top:0.5rem;">Complete a short onboarding form.</p>
+
+    <div class="features-list reveal">
+      <div class="feature-item">
+        <div class="feature-name">Personalised training program</div>
+        <p class="feature-desc">Built around your schedule, your gym, and your goal. Adjusted as you progress.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Weekly check-in</div>
+        <p class="feature-desc">Training, nutrition, sleep, energy — reviewed weekly. Response within 72 hours.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Nutrition blueprint</div>
+        <p class="feature-desc">A practical system that explains the why behind every decision. Not a meal plan.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Exercise video library</div>
+        <p class="feature-desc">Every exercise filmed and explained. You always know how each movement should feel.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Direct coach access</div>
+        <p class="feature-desc">Message me directly whenever you need to. Questions answered within 24 hours.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-name">Progress tracking</div>
+        <p class="feature-desc">Track weight and reps every session across 12 weeks. See exactly how you're improving.</p>
+      </div>
+    </div>
+
+    <div class="pricing reveal">
+      <!-- Program Only -->
+      <div class="pricing-row">
+        <div class="pricing-left">
+          <span class="pricing-tag">Self-guided</span>
+          <div class="pricing-name">Program Only</div>
+          <div class="pricing-price">$79 <small>AUD one-time</small></div>
+          <p class="pricing-desc">For people who are self-motivated and just need a clear, structured plan to follow. No coaching — just the tools.</p>
         </div>
-        <div class="pricing-option featured">
-          <div>
-            <div class="pricing-option-tag">Early access — 3 spots only</div>
-            <div class="pricing-option-name">Full Coaching</div>
-          </div>
-          <div class="pricing-option-price">$200 <span>AUD / month</span></div>
-          <p class="pricing-option-desc">For people who want accountability, weekly feedback, and a coach paying attention every step of the way. Everything in the program — plus me.</p>
-          <div class="pricing-option-includes">
-            <div class="pricing-option-item"><span class="pcheck">✓</span><strong style="color:rgba(250,250,250,0.85)">Everything in Program Only</strong></div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>A 20-minute discovery call</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Weekly check-in — personalised response within 72 hours</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Direct coach access — questions answered within 24 hours</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Program adjusted every 4 weeks based on your progress</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:0.25rem;">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for a spot</a>
-            <span style="font-size:0.78rem;color:rgba(250,250,250,0.3)">Limited spots available</span>
-          </div>
-          <p class="pricing-option-note" style="margin-top:0.25rem;">Complete a short form, and I will reach out to book a call.</p>
-          <div style="padding:0.75rem 0 0;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
-            <div class="payment-label">Payment</div>
-            <div class="payment-methods">
-              <div class="payment-method"><span>💳</span> Card</div>
-              <div class="payment-method"><span>🍎</span> Apple Pay</div>
-              <div class="payment-method"><span>🏦</span> BECS</div>
-            </div>
-            <div class="payment-note">Via Stripe.</div>
+        <div class="pricing-right">
+          <ul class="pricing-includes">
+            <li><span class="ck">✓</span>Personalised training program</li>
+            <li><span class="ck">✓</span>Nutrition blueprint</li>
+            <li><span class="ck">✓</span>Exercise video library access</li>
+            <li><span class="ck">✓</span>Progress tracking sheet</li>
+          </ul>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-secondary" target="_blank">Get the program</a>
+          <p class="pricing-note">Complete a short onboarding form.</p>
+        </div>
+      </div>
+
+      <!-- Full Coaching -->
+      <div class="pricing-row is-featured">
+        <div class="pricing-left">
+          <span class="pricing-tag">Early access &mdash; 3 spots only</span>
+          <div class="pricing-name">Full Coaching</div>
+          <div class="pricing-price">$200 <small>AUD / month</small></div>
+          <p class="pricing-desc">For people who want accountability, weekly feedback, and a coach paying attention every step of the way. Everything in the program — plus me.</p>
+        </div>
+        <div class="pricing-right">
+          <ul class="pricing-includes">
+            <li><span class="ck">✓</span><strong style="color:rgba(250,250,250,0.8)">Everything in Program Only</strong></li>
+            <li><span class="ck">✓</span>A 20-minute discovery call</li>
+            <li><span class="ck">✓</span>Weekly check-in — personalised response within 72 hours</li>
+            <li><span class="ck">✓</span>Direct coach access — answered within 24 hours</li>
+            <li><span class="ck">✓</span>Program adjusted every 4 weeks</li>
+          </ul>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for a spot</a>
+          <p class="pricing-note">Fill in the form — I will reach out to book a call.</p>
+          <div class="pricing-payment">
+            <span class="pricing-payment-label">Payment</span>
+            <span class="pricing-payment-item">
+              <svg class="pay-icon" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              Card
+            </span>
+            <span class="pricing-payment-item">
+              <svg class="pay-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M15.5 8.5c-.83-1.17-2.17-1.5-3.5-1.5-2.21 0-4 1.79-4 4s1.79 4 4 4c1.33 0 2.67-.33 3.5-1.5"/></svg>
+              Apple Pay
+            </span>
+            <span class="pricing-payment-item">
+              <svg class="pay-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              BECS
+            </span>
+            <span class="pricing-payment-item" style="margin-left:auto;opacity:0.6">Via Stripe</span>
           </div>
         </div>
       </div>
@@ -283,27 +905,30 @@
   </div>
 </section>
 
+<!-- ── ABOUT ─────────────────────────────────────────────── -->
 <section class="about" id="about">
   <div class="about-inner">
-    <div class="reveal">
-      <p class="section-label">About your coach</p>
+    <div class="about-photo reveal">
+      <img src="group.png" alt="Dalius Butkus — DB Coaching">
+    </div>
+    <div class="about-text reveal">
+      <span class="about-tag">About your coach</span>
       <h2 class="about-headline">I have been<br>where you are.</h2>
       <p class="about-body">I have been training seriously for over 12 years. In that time I have been through the inconsistency, the programs that did not stick, the periods where life took over. I know the difference between wanting to change and actually building the habits that make change permanent.</p>
-      <p class="about-body">I hold <strong>Cert III and IV in Fitness in Australia</strong> and a <strong>European Personal Training licence</strong>. But my real qualification is this: I have helped people who kept starting over finally stop starting over.</p>
-      <p class="about-body">My approach is simple. I work with what you already have. We do not burn everything down and rebuild from scratch. We find what is working, fix what is not, and build a system around your actual life — not a perfect version of it.</p>
-    </div>
-    <div class="about-image reveal">
-      <div class="transformation-block">
-        <img src="transformation.png" alt="Transformation — DB Coaching">
+      <p class="about-body">My approach is simple. I work with what you already have. We find what is working, fix what is not, and build a system around your actual life — not a perfect version of it.</p>
+      <div class="about-creds">
+        <div class="about-cred"><strong>Cert III &amp; IV Fitness</strong>Australia</div>
+        <div class="about-cred"><strong>Personal Training Licence</strong>Europe</div>
+        <div class="about-cred"><strong>12+ years</strong>Training experience</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- ── FORWHO ─────────────────────────────────────────────── -->
 <section class="forwho">
   <div class="forwho-inner">
-    <p class="section-label">Is this for you?</p>
-    <h2 class="forwho-headline">Right for some.<br><span>Not for everyone.</span></h2>
+    <h2 class="forwho-headline reveal">Right for some.<br><em>Not for everyone.</em></h2>
     <div class="forwho-grid reveal">
       <div class="forwho-col">
         <h3>This is for you if</h3>
@@ -329,76 +954,89 @@
   </div>
 </section>
 
+<!-- ── PROCESS ────────────────────────────────────────────── -->
 <section class="process">
   <div class="process-inner">
-    <p class="section-label">How it works</p>
-    <h2 class="process-headline">Simple from day one.</h2>
-
-    <!-- PROGRAM ONLY -->
-    <div style="margin-top:3rem;">
-      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(184,150,12,0.2);">Program only</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="reveal">
-        <div style="position:absolute;top:1.25rem;left:1.25rem;right:1.25rem;height:1px;background:rgba(184,150,12,0.3);"></div>
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <div class="step-title">Fill in the form</div>
-          <p class="step-desc">Complete the short onboarding form. Takes 5 minutes. Tells me your goals, schedule and training history.</p>
+    <div class="process-header reveal">
+      <h2 class="process-headline">Simple from<br>day one.</h2>
+      <p class="process-subhead">Two options, both straightforward. Fill in a short form and you are on your way — whether you want the program alone or full coaching.</p>
+    </div>
+    <div class="process-cols reveal">
+      <div>
+        <span class="process-track-label">Program only</span>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-n">1</div>
+            <div>
+              <div class="step-title">Fill in the form</div>
+              <p class="step-desc">Complete the short onboarding form. Takes 5 minutes. Tells me your goals, schedule and training history.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-n">2</div>
+            <div>
+              <div class="step-title">Receive your program</div>
+              <p class="step-desc">I build your personalised program and nutrition blueprint. Delivered within 72 hours.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-n">3</div>
+            <div>
+              <div class="step-title">Start training</div>
+              <p class="step-desc">Follow your program, track your progress, use the exercise video library whenever you need it.</p>
+            </div>
+          </div>
         </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <div class="step-title">Receive your program</div>
-          <p class="step-desc">I build your personalised program and nutrition blueprint based on your answers. Delivered within 72 hours.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <div class="step-title">Start training</div>
-          <p class="step-desc">Follow your program, track your progress, and use the exercise video library whenever you need it.</p>
+      </div>
+      <div>
+        <span class="process-track-label">Full coaching</span>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-n">1</div>
+            <div>
+              <div class="step-title">Fill in the form</div>
+              <p class="step-desc">Complete the onboarding form. Tells me who you are and what you are working toward.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-n">2</div>
+            <div>
+              <div class="step-title">Discovery call</div>
+              <p class="step-desc">A 20-minute call to talk through your goals, history and what has and has not worked before.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-n">3</div>
+            <div>
+              <div class="step-title">Your program</div>
+              <p class="step-desc">I build everything personalised to you. You receive it before day one.</p>
+            </div>
+          </div>
+          <div class="process-step">
+            <div class="step-n">4</div>
+            <div>
+              <div class="step-title">We start</div>
+              <p class="step-desc">Weekly check-ins begin. I review your progress each week and respond with specific feedback.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- FULL COACHING -->
-    <div style="margin-top:4rem;">
-      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(184,150,12,0.2);">Full coaching</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="reveal">
-        <div style="position:absolute;top:1.25rem;left:1.25rem;right:1.25rem;height:1px;background:rgba(184,150,12,0.3);"></div>
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <div class="step-title">Fill in the form</div>
-          <p class="step-desc">Complete the onboarding form. Takes 5 minutes. Tells me who you are and what you are working toward.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <div class="step-title">Discovery call</div>
-          <p class="step-desc">A 20-minute call to talk through your goals, history and what has and has not worked before.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <div class="step-title">Your program</div>
-          <p class="step-desc">I build everything personalised to you. You receive it before day one.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <div class="step-title">We start</div>
-          <p class="step-desc">Weekly check-ins begin. I review your progress each week and respond with specific feedback.</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
+<!-- ── CTA ────────────────────────────────────────────────── -->
 <section class="cta-section">
   <div class="cta-inner reveal">
-    <h2 class="cta-headline">Ready to stop starting over?</h2>
+    <h2 class="cta-headline">Ready to<br>stop starting<br><em>over?</em></h2>
     <p class="cta-sub">Early access coaching from $200 AUD/month. Or get the program only for $79. Fill in the form — it takes 5 minutes and costs nothing.</p>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply now</a>
-    <p class="cta-fine" style="color: rgba(250,250,250,0.45);">Online coaching · Available worldwide</p>
+    <span class="cta-fine">Online coaching &middot; Available worldwide</span>
   </div>
 </section>
 
 <footer>
-  <div class="footer-logo">DB <span>Coaching</span></div>
+  <div class="footer-logo">DB <em>Coaching</em></div>
   <div class="footer-links">
     <a href="#about">About</a>
     <a href="#offer">Coaching</a>
@@ -406,27 +1044,27 @@
   </div>
   <div class="footer-ig">
     <a href="https://instagram.com/dalius_butkus" target="_blank">
-      <svg class="ig-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
+      <svg class="ig-icon" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       @dalius_butkus
     </a>
   </div>
 </footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  }),
+  { threshold: 0.1 }
+);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
   });
+});
 </script>
 </body>
 </html>
