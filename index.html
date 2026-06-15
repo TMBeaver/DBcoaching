@@ -271,9 +271,26 @@ nav {
   padding: 1.75rem;
   border-right: 1px solid rgba(255,255,255,0.06);
   border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
 .feature-item:nth-child(3n) { border-right: none; }
 .feature-item:nth-last-child(-n+3) { border-bottom: none; }
+.feature-icon {
+  width: 36px; height: 36px;
+  background: rgba(184,150,12,0.1);
+  border: 1px solid rgba(184,150,12,0.25);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.feature-icon svg {
+  width: 16px; height: 16px;
+  stroke: var(--gold); fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+}
+.feature-text {}
 .feature-name {
   font-size: 0.88rem; font-weight: 500;
   color: var(--white);
@@ -463,6 +480,81 @@ nav {
   font-weight: 500;
   color: var(--black);
   font-size: 0.82rem;
+}
+
+/* ─── TRANSFORMATION ──────────────────────────────────── */
+.transformation {
+  background: var(--black);
+  padding: 0;
+  overflow: hidden;
+}
+.transformation-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+}
+.transformation-photo {
+  position: relative;
+  overflow: hidden;
+}
+.transformation-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: grayscale(8%) contrast(1.05);
+}
+.transformation-copy {
+  padding: 5rem 5rem 5rem 5.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--black);
+}
+.transformation-tag {
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.75rem;
+  display: block;
+}
+.transformation-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--white);
+  letter-spacing: 0.01em;
+  margin-bottom: 1.75rem;
+}
+.transformation-headline em { color: var(--gold); font-style: normal; }
+.transformation-body {
+  font-size: 0.95rem; font-weight: 300;
+  color: rgba(250,250,250,0.52);
+  line-height: 1.8;
+  max-width: 440px;
+}
+.transformation-stat {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex;
+  gap: 3rem;
+}
+.transformation-stat-item {}
+.transformation-stat-n {
+  font-family: var(--font-display);
+  font-size: 2.5rem; font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.transformation-stat-label {
+  font-size: 0.78rem; font-weight: 300;
+  color: rgba(250,250,250,0.38);
+  margin-top: 0.3rem;
+  line-height: 1.4;
 }
 
 /* ─── FORWHO ──────────────────────────────────────────── */
@@ -721,6 +813,10 @@ a, button { cursor: pointer; }
   .about-text { padding: 4rem 1.5rem; }
   .about-creds { gap: 1.5rem; }
 
+  .transformation-inner { grid-template-columns: 1fr; }
+  .transformation-photo { height: 75vw; }
+  .transformation-copy { padding: 4rem 1.5rem; }
+
   .forwho { padding: 5rem 1.5rem; }
   .forwho-grid { grid-template-columns: 1fr; }
   .forwho-col { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 2rem 0; }
@@ -819,28 +915,46 @@ a, button { cursor: pointer; }
 
     <div class="features-list reveal">
       <div class="feature-item">
-        <div class="feature-name">Personalised training program</div>
-        <p class="feature-desc">Built around your schedule, your gym, and your goal. Adjusted as you progress.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <div class="feature-text">
+          <div class="feature-name">Personalised training program</div>
+          <p class="feature-desc">Built around your schedule, your gym, and your goal. Adjusted as you progress.</p>
+        </div>
       </div>
       <div class="feature-item">
-        <div class="feature-name">Weekly check-in</div>
-        <p class="feature-desc">Training, nutrition, sleep, energy — reviewed weekly. Response within 72 hours.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+        <div class="feature-text">
+          <div class="feature-name">Weekly check-in</div>
+          <p class="feature-desc">Training, nutrition, sleep, energy — reviewed weekly. Response within 72 hours.</p>
+        </div>
       </div>
       <div class="feature-item">
-        <div class="feature-name">Nutrition blueprint</div>
-        <p class="feature-desc">A practical system that explains the why behind every decision. Not a meal plan.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div>
+        <div class="feature-text">
+          <div class="feature-name">Nutrition blueprint</div>
+          <p class="feature-desc">A practical system that explains the why behind every decision. Not a meal plan.</p>
+        </div>
       </div>
       <div class="feature-item">
-        <div class="feature-name">Exercise video library</div>
-        <p class="feature-desc">Every exercise filmed and explained. You always know how each movement should feel.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+        <div class="feature-text">
+          <div class="feature-name">Exercise video library</div>
+          <p class="feature-desc">Every exercise filmed and explained. You always know how each movement should feel.</p>
+        </div>
       </div>
       <div class="feature-item">
-        <div class="feature-name">Direct coach access</div>
-        <p class="feature-desc">Message me directly whenever you need to. Questions answered within 24 hours.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="feature-text">
+          <div class="feature-name">Direct coach access</div>
+          <p class="feature-desc">Message me directly whenever you need to. Questions answered within 24 hours.</p>
+        </div>
       </div>
       <div class="feature-item">
-        <div class="feature-name">Progress tracking</div>
-        <p class="feature-desc">Track weight and reps every session across 12 weeks. See exactly how you're improving.</p>
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="feature-text">
+          <div class="feature-name">Progress tracking</div>
+          <p class="feature-desc">Track weight and reps every session across 12 weeks. See exactly how you're improving.</p>
+        </div>
       </div>
     </div>
 
@@ -920,6 +1034,30 @@ a, button { cursor: pointer; }
         <div class="about-cred"><strong>Cert III &amp; IV Fitness</strong>Australia</div>
         <div class="about-cred"><strong>Personal Training Licence</strong>Europe</div>
         <div class="about-cred"><strong>12+ years</strong>Training experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRANSFORMATION ──────────────────────────────────────── -->
+<section class="transformation">
+  <div class="transformation-inner">
+    <div class="transformation-photo reveal">
+      <img src="transformation.png" alt="Dalius Butkus transformation — 12 years of training" loading="lazy">
+    </div>
+    <div class="transformation-copy reveal">
+      <span class="transformation-tag">Proof of the process</span>
+      <h2 class="transformation-headline">12 years.<br>The same <em>battles.</em></h2>
+      <p class="transformation-body">I have been through the inconsistency, the programs that did not stick, the periods where life took over. I know exactly what it takes to build a body that lasts — because I have done it myself, starting from exactly where you are now.</p>
+      <div class="transformation-stat">
+        <div class="transformation-stat-item">
+          <div class="transformation-stat-n">12+</div>
+          <div class="transformation-stat-label">Years training<br>consistently</div>
+        </div>
+        <div class="transformation-stat-item">
+          <div class="transformation-stat-n">Cert</div>
+          <div class="transformation-stat-label">III &amp; IV Fitness<br>qualified</div>
+        </div>
       </div>
     </div>
   </div>
