@@ -7,426 +7,924 @@
 <meta name="description" content="Online personal coaching for people who keep starting over. Build the consistency to train, eat right and transform your body.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --black: #0A0A0A; --white: #FAFAFA; --gold: #B8960C; --gold-light: #D4AE2A;
-    --gray-100: #F4F4F4; --gray-200: #E0E0E0; --gray-500: #6B7280; --gray-800: #1E1E1E;
-    --font-display: 'Bebas Neue', sans-serif; --font-body: 'DM Sans', sans-serif;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --black: #0A0A0A;
+  --panel: #131313;
+  --white: #FAFAFA;
+  --gold: #B8960C;
+  --gold-hot: #D4AE2A;
+  --line: rgba(250,250,250,0.14);
+  --line-hard: rgba(250,250,250,0.85);
+  --dim: rgba(250,250,250,0.55);
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+}
+img { display: block; }
+a { cursor: pointer; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+::selection { background: var(--gold); color: var(--black); }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+}
+.tag {
+  font-family: var(--font-body);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--dim);
+}
+.tag .br, .br { color: var(--gold); }
+
+/* ─── NAV ───────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 2.5rem;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--gold);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--white); }
+.nav-cta {
+  font-family: var(--font-display);
+  font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-cta em { font-style: normal; color: var(--gold); }
+.nav-cta:hover { color: var(--gold); }
+
+/* ─── HERO ──────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 7rem 2.5rem 0;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 40%;
+  filter: grayscale(65%) contrast(1.1) brightness(0.42);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--black) 4%, rgba(10,10,10,0.25) 45%, rgba(10,10,10,0.55) 100%);
+}
+.hero-top {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; gap: 2rem;
+  padding-bottom: 4rem;
+}
+.hero-main { position: relative; z-index: 1; }
+.hero-h {
+  font-size: clamp(4.2rem, 14.5vw, 15rem);
+  color: var(--white);
+}
+.hero-h .gold { color: var(--gold-hot); }
+.h-img {
+  display: inline-block;
+  width: clamp(70px, 11vw, 230px);
+  height: 0.68em;
+  vertical-align: baseline;
+  transform: translateY(0.06em);
+  margin: 0 0.06em;
+  overflow: hidden;
+}
+.h-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(35%) contrast(1.1) brightness(0.85);
+}
+.hero-row2 {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 3rem; flex-wrap: wrap;
+  padding-bottom: 3.5rem;
+}
+.hero-sub {
+  max-width: 400px;
+  font-size: 0.95rem; font-weight: 300;
+  color: var(--dim);
+  line-height: 1.7;
+  padding-bottom: 0.75rem;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+.hero-apply {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.5rem);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  border-bottom: 3px solid var(--gold);
+  padding-bottom: 0.35rem;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.hero-apply em { font-style: normal; color: var(--gold); }
+.hero-apply:hover { color: var(--gold); }
+
+/* ─── MARQUEE ───────────────────────────────────────────── */
+.marquee {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--black);
+  position: relative; z-index: 2;
+}
+.marquee-track {
+  display: flex; align-items: center;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+.m-item {
+  display: flex; align-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--white);
+  padding: 1.4rem 0;
+}
+.m-item em { font-style: normal; color: var(--gold); margin-right: 0.35em; }
+.m-star { color: var(--gold); font-size: 0.5em; margin: 0 1.4em; }
+.m-img {
+  width: 5.5rem; height: 3rem;
+  overflow: hidden; margin: 0 1.4em;
+  flex-shrink: 0;
+}
+.m-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(60%) brightness(0.8); }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── APPROACH (mosaic) ─────────────────────────────────── */
+.approach { padding: 8rem 2.5rem 6rem; }
+.approach-title { font-size: clamp(3.6rem, 10.5vw, 11rem); }
+.approach-title .star { color: var(--white); font-size: 0.42em; vertical-align: 0.55em; margin: 0 0.18em; }
+.approach-title .l2 { display: block; color: var(--gold); }
+.mosaic {
+  margin-top: 4.5rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.25rem;
+}
+.mo-cell { min-height: 320px; overflow: hidden; position: relative; }
+.mo-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(45%) contrast(1.08) brightness(0.75); position: absolute; inset: 0; }
+.mo-c1 { grid-column: span 4; }
+.mo-c2 { grid-column: span 3; }
+.mo-c3 { grid-column: span 5; }
+.mo-c4 { grid-column: span 3; }
+.mo-c5 { grid-column: span 4; }
+.mo-c6 { grid-column: span 5; }
+.mo-circle {
+  background: var(--panel);
+  display: flex; align-items: center; justify-content: center;
+}
+.mo-circle .disc {
+  width: min(260px, 78%);
+  aspect-ratio: 1;
+  background: var(--black);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.mo-circle .disc span {
+  font-family: var(--font-display);
+  font-size: 1.35rem; line-height: 1.15;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--white);
+}
+.mo-text {
+  background: var(--panel);
+  display: flex; align-items: center;
+  padding: 3rem;
+}
+.mo-text p {
+  font-size: 1.02rem; font-weight: 300;
+  color: var(--dim); line-height: 1.75;
+  max-width: 460px;
+}
+.mo-text p strong { color: var(--white); font-weight: 500; }
+.mo-text .br { font-family: var(--font-display); font-size: 1.4rem; margin: 0 0.4rem; }
+
+/* ─── FEATURES (giant list) ─────────────────────────────── */
+.features { padding: 7rem 2.5rem; }
+.features-head {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 3rem; flex-wrap: wrap;
+  margin-bottom: 4rem;
+}
+.features-title { font-size: clamp(3.4rem, 9vw, 9.5rem); }
+.features-title em { font-style: normal; color: var(--gold); }
+.features-note {
+  max-width: 340px;
+  font-size: 0.92rem; font-weight: 300;
+  color: var(--dim); line-height: 1.7;
+  text-align: right;
+  padding-bottom: 1rem;
+}
+.features-note .br { font-family: var(--font-display); font-size: 1.2rem; margin: 0 0.35rem; }
+.fgroup-label {
+  font-family: var(--font-body);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--dim);
+  margin: 3.5rem 0 0.5rem;
+}
+.frow {
+  display: block;
+  position: relative;
+  border-bottom: 1px solid var(--line-hard);
+  text-decoration: none;
+  padding: 1.1rem 0.5rem;
+}
+.frow:first-of-type, .fgroup-label + .frow { border-top: 1px solid var(--line-hard); }
+.frow::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: var(--gold);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+.frow-inner {
+  position: relative;
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 2rem;
+}
+.frow-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5.5vw, 4.6rem);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1;
+  transition: color 0.18s;
+}
+.frow-meta {
+  font-family: var(--font-body);
+  font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--black);
+  opacity: 0;
+  transition: opacity 0.2s;
+  text-align: right;
+  white-space: nowrap;
+}
+.frow:hover::before, .frow:focus-visible::before { transform: scaleY(1); }
+.frow:hover .frow-name, .frow:focus-visible .frow-name { color: var(--black); }
+.frow:hover .frow-meta, .frow:focus-visible .frow-meta { opacity: 1; }
+
+/* ─── PROOF ─────────────────────────────────────────────── */
+.proof {
+  padding: 8rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.proof-inner {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  align-items: center;
+  gap: 0;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+.proof-left { position: relative; z-index: 2; }
+.proof-tag { margin-bottom: 2rem; display: block; }
+.proof-word {
+  font-size: clamp(5rem, 16vw, 15rem);
+  color: var(--gold);
+  margin-right: -40%;
+  position: relative;
+}
+.proof-cards {
+  margin-top: 3rem;
+  display: flex; flex-direction: column; gap: 0.8rem;
+  max-width: 380px;
+}
+.proof-card {
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: 1.5rem; line-height: 1.05;
+  text-transform: uppercase; letter-spacing: 0.03em;
+  padding: 1.4rem 1.75rem;
+}
+.proof-card small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.68rem; font-weight: 500;
+  letter-spacing: 0.15em;
+  color: rgba(10,10,10,0.55);
+  margin-top: 0.3rem;
+}
+.proof-card:nth-child(1) { transform: rotate(-3deg); }
+.proof-card:nth-child(2) { transform: rotate(2deg); margin-left: 2.5rem; }
+.proof-card:nth-child(3) { transform: rotate(-1.5deg); margin-left: 0.75rem; }
+.proof-photo {
+  position: relative;
+  height: min(78vh, 760px);
+  overflow: hidden;
+}
+.proof-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  filter: grayscale(15%) contrast(1.04) brightness(0.9);
+}
+
+/* ─── ABOUT ─────────────────────────────────────────────── */
+.about { padding: 8rem 2.5rem; }
+.about-h { font-size: clamp(3.6rem, 11vw, 11.5rem); }
+.about-h .gold { color: var(--gold); }
+.about-cols {
+  margin-top: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.about-body p {
+  font-size: 1rem; font-weight: 300;
+  color: var(--dim); line-height: 1.8;
+}
+.about-body p + p { margin-top: 1.25rem; }
+.about-body p strong { color: var(--white); font-weight: 500; }
+.about-body .br { font-family: var(--font-display); font-size: 1.3rem; margin: 0 0.4rem; }
+.about-creds {
+  display: flex; gap: 2.5rem; flex-wrap: wrap;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.about-cred {
+  font-size: 0.75rem; font-weight: 300;
+  color: var(--dim); line-height: 1.5;
+}
+.about-cred strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400; font-size: 1.15rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--white);
+}
+.forwho {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line);
+}
+.forwho-col { padding: 2.5rem; }
+.forwho-col + .forwho-col { border-left: 1px solid var(--line); }
+.forwho-col h3 {
+  font-family: var(--font-body);
+  font-size: 0.72rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.forwho-col.no h3 { color: var(--dim); }
+.forwho-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+.forwho-col li {
+  font-size: 0.9rem; font-weight: 300;
+  color: var(--dim); line-height: 1.5;
+  display: flex; gap: 0.7rem; align-items: flex-start;
+}
+.forwho-col li::before {
+  content: '+';
+  color: var(--gold);
+  font-weight: 500; flex-shrink: 0;
+}
+.forwho-col.no li::before { content: '—'; color: rgba(250,250,250,0.25); }
+
+/* ─── PRICING ───────────────────────────────────────────── */
+.pricing { padding: 8rem 2.5rem; }
+.pricing-title { font-size: clamp(3.6rem, 10vw, 10.5rem); margin-bottom: 4rem; }
+.pricing-title em { font-style: normal; color: var(--gold); }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 1200px;
+}
+.pcard {
+  background: var(--panel);
+  position: relative;
+  display: flex; flex-direction: column;
+  min-height: 520px;
+}
+.pcard-fold {
+  position: absolute; top: 0; right: 0;
+  width: 58px; height: 58px;
+  background: linear-gradient(225deg, var(--black) 0%, var(--black) 50%, var(--gold) 50%, var(--gold) 100%);
+}
+.pcard-head { padding: 2.25rem 2.25rem 1.75rem; border-bottom: 1px solid var(--line); }
+.pcard-num {
+  font-family: var(--font-display);
+  font-size: 1rem; color: var(--dim);
+  letter-spacing: 0.1em;
+  display: block; margin-bottom: 1.5rem;
+}
+.pcard-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.4vw, 3.2rem);
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 0.95;
+}
+.pcard-tag {
+  display: block;
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.9rem;
+}
+.pcard-list { padding: 2rem 2.25rem; flex: 1; list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+.pcard-list li {
+  font-size: 0.92rem; font-weight: 300;
+  color: var(--dim); line-height: 1.5;
+  display: flex; gap: 0.7rem; align-items: flex-start;
+}
+.pcard-list li::before { content: '+'; color: var(--gold); font-weight: 500; flex-shrink: 0; }
+.pcard-list li strong { color: var(--white); font-weight: 500; }
+.pcard-foot {
+  display: grid; grid-template-columns: 1fr auto;
+  border-top: 1px solid var(--line);
+  align-items: stretch;
+}
+.pcard-price {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: var(--white);
+  padding: 1.4rem 2.25rem;
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.pcard-price small {
+  font-family: var(--font-body);
+  font-size: 0.78rem; font-weight: 400;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+}
+.pcard-btn {
+  font-family: var(--font-display);
+  font-size: 1.5rem; letter-spacing: 0.05em; text-transform: uppercase;
+  background: var(--gold); color: var(--black);
+  text-decoration: none;
+  display: flex; align-items: center;
+  padding: 0 2.5rem;
+  transition: background 0.2s;
+}
+.pcard-btn:hover { background: var(--gold-hot); }
+.pcard.featured { background: var(--white); }
+.pcard.featured .pcard-name { color: var(--black); }
+.pcard.featured .pcard-num { color: rgba(10,10,10,0.45); }
+.pcard.featured .pcard-head, .pcard.featured .pcard-foot { border-color: rgba(10,10,10,0.14); }
+.pcard.featured .pcard-list li { color: rgba(10,10,10,0.62); }
+.pcard.featured .pcard-list li strong { color: var(--black); }
+.pcard.featured .pcard-price { color: var(--black); }
+.pcard.featured .pcard-price small { color: rgba(10,10,10,0.5); }
+.pcard-note {
+  grid-column: 1 / -1;
+  font-size: 0.72rem; font-weight: 300;
+  color: var(--dim);
+  padding: 0 2.25rem 1.25rem;
+}
+.pcard.featured .pcard-note { color: rgba(10,10,10,0.5); }
+
+.process {
+  margin-top: 1.5rem;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+}
+.pstep { padding: 1.75rem; }
+.pstep + .pstep { border-left: 1px solid var(--line); }
+.pstep-n {
+  font-family: var(--font-display);
+  font-size: 1rem; color: var(--gold);
+  display: block; margin-bottom: 0.75rem;
+}
+.pstep-t {
+  font-family: var(--font-display);
+  font-size: 1.3rem; text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+.pstep p { font-size: 0.8rem; font-weight: 300; color: var(--dim); line-height: 1.55; }
+
+/* ─── CTA ───────────────────────────────────────────────── */
+.cta {
+  position: relative;
+  padding: 10rem 2.5rem;
+  overflow: hidden;
+}
+.cta-bg { position: absolute; inset: 0; }
+.cta-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 30%;
+  filter: grayscale(70%) contrast(1.1) brightness(0.3);
+}
+.cta-inner { position: relative; z-index: 1; }
+.cta-tag { display: block; margin-bottom: 2.5rem; }
+.cta-h { font-size: clamp(4rem, 13vw, 13.5rem); }
+.cta-h .gold { color: var(--gold-hot); }
+.cta-circle {
+  position: absolute;
+  right: 4vw; bottom: -1rem;
+  z-index: 2;
+  width: clamp(180px, 18vw, 250px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.9vw, 1.8rem);
+  letter-spacing: 0.04em; text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1.1;
+  padding: 1.5rem;
+  transition: transform 0.25s ease, background 0.2s;
+}
+.cta-circle:hover { transform: scale(1.07); background: var(--gold-hot); }
+.cta-fine { display: block; margin-top: 3rem; }
+
+/* ─── FOOTER ────────────────────────────────────────────── */
+footer { border-top: 1px solid var(--line); }
+.f-row1 {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr) auto;
+  border-bottom: 1px solid var(--line);
+}
+.f-cell {
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center;
+}
+.f-cell + .f-cell { border-left: 1px solid var(--line); }
+.f-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--gold);
+}
+.f-logo span { color: var(--white); }
+.f-link {
+  font-family: var(--font-display);
+  font-size: 1.05rem; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  transition: color 0.2s;
+}
+.f-link:hover { color: var(--gold); }
+.f-top {
+  background: var(--gold);
+  border-left: none !important;
+  padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.f-top:hover { background: var(--gold-hot); }
+.f-top svg { width: 22px; height: 22px; stroke: var(--black); stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.f-row2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.f-statement {
+  font-size: clamp(3rem, 8vw, 8rem);
+  color: var(--white);
+  padding: 4rem 2rem;
+}
+.f-statement em { font-style: normal; color: var(--gold); }
+.f-meta {
+  border-left: 1px solid var(--line);
+  padding: 4rem 2rem;
+  display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem;
+}
+.f-meta a { color: var(--dim); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+.f-meta a:hover { color: var(--gold); }
+.f-meta p { font-size: 0.75rem; font-weight: 300; color: rgba(250,250,250,0.3); }
+
+/* ─── REVEAL ────────────────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  .marquee-track { animation: none; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* ─── MOBILE ────────────────────────────────────────────── */
+@media (hover: none) {
+  .frow::before { display: none; }
+  .frow-inner { flex-direction: column; gap: 0.3rem; }
+  .frow-meta { opacity: 1; color: var(--dim); text-align: left; white-space: normal; }
+}
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.25rem; }
+  .hero { padding: 6rem 1.25rem 0; }
+  .hero-top { flex-direction: column; gap: 0.5rem; padding-bottom: 2.5rem; }
+  .hero-row2 { padding-bottom: 3rem; }
+
+  .approach { padding: 5rem 1.25rem 4rem; }
+  .mosaic { grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 3rem; }
+  .mo-cell { grid-column: span 1 !important; min-height: 230px; }
+  .mo-c5 { grid-column: span 2 !important; }
+  .mo-text { grid-column: span 2 !important; padding: 2rem 1.5rem; }
+  .mo-circle .disc span { font-size: 1.05rem; }
+
+  .features { padding: 5rem 1.25rem; }
+  .features-note { text-align: left; }
+  .frow-inner { flex-direction: column; gap: 0.3rem; }
+  .frow-meta { opacity: 1; color: var(--dim); text-align: left; white-space: normal; }
+  .frow::before { display: none; }
+
+  .proof { padding: 5rem 1.25rem; }
+  .proof-inner { grid-template-columns: 1fr; }
+  .proof-word { margin-right: 0; }
+  .proof-photo { height: 120vw; margin-top: 2.5rem; order: 2; }
+  .proof-cards { margin-top: 2rem; }
+
+  .about { padding: 5rem 1.25rem; }
+  .about-cols { grid-template-columns: 1fr; gap: 3rem; }
+  .forwho { grid-template-columns: 1fr; }
+  .forwho-col + .forwho-col { border-left: none; border-top: 1px solid var(--line); }
+
+  .pricing { padding: 5rem 1.25rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pcard { min-height: 0; }
+  .process { grid-template-columns: 1fr 1fr; }
+  .pstep:nth-child(3) { border-left: none; }
+  .pstep:nth-child(n+3) { border-top: 1px solid var(--line); }
+
+  .cta { padding: 6rem 1.25rem 7rem; }
+  .cta-circle {
+    position: static;
+    margin-top: 3rem;
+    width: 170px;
   }
-  html { scroll-behavior: smooth; }
-  body { font-family: var(--font-body); background: var(--white); color: var(--black); overflow-x: hidden; font-size: 16px; line-height: 1.6; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 2.5rem; background: rgba(10,10,10,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(184,150,12,0.2); }
-  .nav-logo { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.06em; color: var(--white); }
-  .nav-logo span { color: var(--gold); }
-  .nav-cta { font-family: var(--font-body); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 0.6rem 1.4rem; text-decoration: none; transition: background 0.2s, transform 0.15s; }
-  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
-  .hero { min-height: 100vh; background: var(--black); display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding-top: 80px; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: linear-gradient(135deg, transparent 40%, rgba(184,150,12,0.04) 100%); pointer-events: none; }
-  .hero-text { padding: 5rem 3rem 5rem 5rem; position: relative; z-index: 2; }
-  .hero-eyebrow { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-  .hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
-  .hero-headline { font-family: var(--font-display); font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 0.95; letter-spacing: 0.02em; color: var(--white); margin-bottom: 1.5rem; }
-  .hero-headline .gold { color: var(--gold); }
-  .hero-sub { font-size: 1.05rem; font-weight: 300; color: rgba(250,250,250,0.65); max-width: 420px; margin-bottom: 2.5rem; line-height: 1.7; }
-  .hero-sub strong { color: var(--white); font-weight: 500; }
-  .hero-actions { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
-  .btn-primary { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1rem 2rem; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .hero-note { font-size: 0.8rem; color: rgba(250,250,250,0.35); font-weight: 300; }
-  .hero-image { position: relative; height: 100vh; overflow: hidden; }
-  .hero-image img { width: 100%; height: 100%; object-fit: cover; object-position: center 55%; filter: grayscale(20%) contrast(1.05); }
-  .hero-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--black) 0%, transparent 30%), linear-gradient(to top, var(--black) 0%, transparent 20%); }
-  .problem { background: var(--black); padding: 6rem 5rem; border-top: 1px solid rgba(184,150,12,0.15); }
-  .problem-inner { max-width: 900px; margin: 0 auto; }
-  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
-  .section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
-  .problem-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1; letter-spacing: 0.02em; color: var(--white); margin-bottom: 2rem; }
-  .problem-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
-  .problem-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1.25rem; border: 0.5px solid rgba(250,250,250,0.08); background: rgba(250,250,250,0.02); }
-  .problem-item::before { content: '—'; color: var(--gold); font-weight: 500; flex-shrink: 0; margin-top: 2px; }
-  .problem-item p { font-size: 0.95rem; color: rgba(250,250,250,0.7); font-weight: 300; line-height: 1.5; }
-  .problem-item p strong { color: var(--white); font-weight: 500; display: block; margin-bottom: 2px; }
-  .solution { background: var(--white); padding: 7rem 5rem; }
-  .solution-inner { max-width: 1100px; margin: 0 auto; }
-  .solution-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
-  .solution-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1; letter-spacing: 0.02em; color: var(--black); margin-bottom: 1.25rem; }
-  .solution-headline span { color: var(--gold); }
-  .solution-body { font-size: 1rem; font-weight: 300; color: var(--gray-500); line-height: 1.75; }
-  .solution-body + .solution-body { margin-top: 1rem; }
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--gray-200); }
-  .pillar { padding: 2rem; border-right: 1px solid var(--gray-200); position: relative; }
-  .pillar:last-child { border-right: none; }
-  .pillar-num { font-family: var(--font-display); font-size: 3rem; color: var(--gray-200); line-height: 1; margin-bottom: 0.5rem; }
-  .pillar-title { font-size: 1rem; font-weight: 500; color: var(--black); margin-bottom: 0.5rem; }
-  .pillar-desc { font-size: 0.88rem; color: var(--gray-500); font-weight: 300; line-height: 1.6; }
-  .pillar-accent { position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--gold); }
-  .offer { background: var(--black); padding: 7rem 5rem; }
-  .offer-inner { max-width: 1100px; margin: 0 auto; }
-  .offer-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--white); margin-bottom: 3rem; }
-  .offer-headline span { color: var(--gold); }
-  .offer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(250,250,250,0.08); }
-  .offer-item { background: var(--black); padding: 2rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: background 0.2s; }
-  .offer-item:hover { background: rgba(184,150,12,0.04); }
-  .offer-icon { width: 40px; height: 40px; background: rgba(184,150,12,0.12); border: 0.5px solid rgba(184,150,12,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .offer-icon svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
-  .offer-item-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.35rem; }
-  .offer-item-desc { font-size: 0.85rem; color: rgba(250,250,250,0.5); font-weight: 300; line-height: 1.6; }
-  .offer-price { margin-top: 3rem; }
-  .pricing-options { display: grid; grid-template-columns: 1fr 2fr; gap: 1px; background: rgba(184,150,12,0.2); margin-top: 3rem; }
-  .pricing-option { background: var(--black); padding: 2rem 2.5rem; display: flex; flex-direction: column; gap: 1rem; }
-  .pricing-option.featured { background: rgba(184,150,12,0.03); border: 1px solid rgba(184,150,12,0.4); }
-  .pricing-option-tag { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); }
-  .pricing-option-name { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--white); line-height: 1; }
-  .pricing-option-price { font-family: var(--font-display); font-size: 2.8rem; color: var(--white); line-height: 1; }
-  .pricing-option-price span { font-family: var(--font-body); font-size: 0.9rem; color: var(--gray-500); font-weight: 300; }
-  .pricing-option-desc { font-size: 0.85rem; color: rgba(250,250,250,0.5); font-weight: 300; line-height: 1.6; flex: 1; }
-  .pricing-option-includes { display: flex; flex-direction: column; gap: 0.4rem; }
-  .pricing-option-item { font-size: 0.82rem; color: rgba(250,250,250,0.6); font-weight: 300; display: flex; gap: 0.5rem; align-items: flex-start; }
-  .pricing-option-note { font-size: 0.75rem; color: rgba(250,250,250,0.3); font-weight: 300; font-style: italic; }
-  .btn-secondary { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); background: transparent; border: 1px solid rgba(184,150,12,0.5); padding: 0.85rem 1.5rem; text-decoration: none; display: inline-block; transition: background 0.2s, border-color 0.2s; align-self: flex-start; }
-  .btn-secondary:hover { background: rgba(184,150,12,0.08); border-color: var(--gold); }
-  .pcheck { color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 1rem; margin-top: 1px; }
-  .payment-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,250,0.4); flex-shrink: 0; }
-  .payment-methods { display: flex; gap: 1.25rem; flex-wrap: wrap; }
-  .payment-method { font-size: 0.82rem; color: rgba(250,250,250,0.55); font-weight: 300; display: flex; align-items: center; gap: 0.35rem; }
-  .payment-note { font-size: 0.78rem; color: rgba(250,250,250,0.3); font-weight: 300; margin-left: auto; }
-  .about { background: var(--white); padding: 7rem 5rem; }
-  .about-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-  .about-image { position: relative; }
-  .about-headline { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); line-height: 1; letter-spacing: 0.02em; color: var(--black); margin-bottom: 1.5rem; }
-  .about-body { font-size: 0.95rem; font-weight: 300; color: var(--gray-500); line-height: 1.8; margin-bottom: 1rem; }
-  .about-body strong { color: var(--black); font-weight: 500; }
-  .transformation-block { border: 0.5px solid var(--gray-200); overflow: hidden; }
-  .transformation-block img { width: 100%; display: block; filter: none; }
-  .forwho { background: var(--gray-100); padding: 7rem 5rem; border-top: 1px solid var(--gray-200); }
-  .forwho-inner { max-width: 1100px; margin: 0 auto; }
-  .forwho-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--black); margin-bottom: 3rem; }
-  .forwho-headline span { color: var(--gold); }
-  .forwho-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .forwho-col h3 { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; }
-  .forwho-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
-  .forwho-list li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.95rem; color: var(--gray-500); font-weight: 300; line-height: 1.5; }
-  .forwho-list li::before { content: '✓'; color: var(--gold); font-weight: 700; flex-shrink: 0; font-size: 0.85rem; margin-top: 2px; }
-  .forwho-col.no .forwho-list li::before { content: '✕'; color: var(--gray-500); }
-  .process { background: var(--black); padding: 7rem 5rem; }
-  .process-inner { max-width: 1100px; margin: 0 auto; }
-  .process-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 4vw, 3.5rem); letter-spacing: 0.02em; color: var(--white); margin-bottom: 3.5rem; }
-  .process-step { padding: 0 1.5rem 0 0; }
-  .step-num { width: 40px; height: 40px; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.2rem; color: var(--black); margin-bottom: 1.5rem; position: relative; z-index: 1; }
-  .step-title { font-size: 0.95rem; font-weight: 500; color: var(--white); margin-bottom: 0.5rem; }
-  .step-desc { font-size: 0.85rem; color: rgba(250,250,250,0.45); font-weight: 300; line-height: 1.6; }
-  .cta-section { background: linear-gradient(rgba(10,10,10,0.72), rgba(184,150,12,0.55)), url('hyroxRUN.png') center center / cover no-repeat; padding: 6rem 5rem; text-align: center; }
-  .cta-inner { max-width: 700px; margin: 0 auto; }
-  .cta-headline { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.02em; color: var(--white); line-height: 1; margin-bottom: 1rem; }
-  .cta-sub { font-size: 1rem; font-weight: 300; color: rgba(250,250,250,0.75); margin-bottom: 2.5rem; line-height: 1.6; }
-  .cta-fine { margin-top: 1.25rem; font-size: 0.8rem; }
-  footer { background: var(--black); padding: 2.5rem 5rem; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(184,150,12,0.15); }
-  .footer-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--white); }
-  .footer-logo span { color: var(--gold); }
-  .footer-links { display: flex; gap: 2rem; }
-  .footer-links a { font-size: 0.8rem; color: rgba(250,250,250,0.4); text-decoration: none; font-weight: 300; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--gold); }
-  .footer-ig { font-size: 0.8rem; color: rgba(250,250,250,0.4); font-weight: 300; display: flex; align-items: center; gap: 0.5rem; }
-  .footer-ig a { color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; }
-  .ig-icon { width: 16px; height: 16px; fill: var(--gold); flex-shrink: 0; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
-  .hero-headline { animation: fadeUp 0.6s 0.1s ease both; }
-  .hero-sub { animation: fadeUp 0.6s 0.2s ease both; }
-  .hero-actions { animation: fadeUp 0.6s 0.3s ease both; }
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-text { padding: 5rem 1.5rem 3rem; }
-    .hero-image { height: 50vh; }
-    .problem { padding: 4rem 1.5rem; }
-    .problem-list { grid-template-columns: 1fr; }
-    .solution { padding: 4rem 1.5rem; }
-    .solution-top { grid-template-columns: 1fr; gap: 2rem; }
-    .pillars { grid-template-columns: 1fr; }
-    .pillar { border-right: none; border-bottom: 1px solid var(--gray-200); }
-    .offer { padding: 4rem 1.5rem; }
-    .offer-grid { grid-template-columns: 1fr; }
-    .about { padding: 4rem 1.5rem; }
-    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .forwho { padding: 4rem 1.5rem; }
-    .forwho-grid { grid-template-columns: 1fr; }
-    .process { padding: 4rem 1.5rem; }
-    .pricing-options { grid-template-columns: 1fr; }
-    .process-two-col { grid-template-columns: 1fr !important; gap: 3rem !important; }
-    .cta-section { padding: 4rem 1.5rem; }
-    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
-    .footer-links { flex-wrap: wrap; justify-content: center; }
-  }
+  .cta-fine { margin-top: 2rem; }
+
+  .f-row1 { grid-template-columns: 1fr 1fr; }
+  .f-cell { border-left: none !important; border-top: 1px solid var(--line); padding: 1.25rem 1.5rem; }
+  .f-cell:first-child, .f-cell:nth-child(2) { border-top: none; }
+  .f-top { grid-column: 2; justify-content: center; }
+  .f-row2 { grid-template-columns: 1fr; }
+  .f-statement { padding: 3rem 1.5rem; }
+  .f-meta { border-left: none; border-top: 1px solid var(--line); padding: 2rem 1.5rem; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">DB <span>Coaching</span></div>
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="nav-cta" target="_blank">Apply now</a>
+  <a class="nav-logo" href="#top">DB<span>&nbsp;Coaching</span></a>
+  <a class="nav-cta" href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank" rel="noopener">Apply <em>[+]</em></a>
 </nav>
 
-<section class="hero">
-  <div class="hero-text">
-    <p class="hero-eyebrow">Online Personal Coaching</p>
-    <h1 class="hero-headline">Stop<br>Starting<br><span class="gold">Over.</span></h1>
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="hyroxrow.png" alt="" aria-hidden="true"></div>
+  <div class="hero-top">
+    <span class="tag"><span class="br">[</span> Online personal coaching <span class="br">]</span></span>
+    <span class="tag">Available worldwide</span>
+  </div>
+  <div class="hero-main">
+    <h1 class="display hero-h">
+      Stop<span class="h-img"><img src="purpleChange.png" alt="Dalius Butkus training"></span>starting<br>
+      <span class="gold">over.</span>
+    </h1>
+  </div>
+  <div class="hero-row2">
     <p class="hero-sub">You have tried before. You know what to do. The problem has never been information — it has been <strong>consistency.</strong> That is exactly what I build with you.</p>
-    <div class="hero-actions">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for coaching</a>
-      <span class="hero-note">From $79 AUD · Early access coaching from $200/month</span>
-    </div>
+    <a class="hero-apply" href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank" rel="noopener">Apply for coaching <em>[+]</em></a>
   </div>
-  <div class="hero-image">
-    <img src="hyroxrow.png" alt="Dalius Butkus — DB Coaching">
-  </div>
-</section>
+</header>
 
-<section class="problem">
-  <div class="problem-inner">
-    <p class="section-label">Sound familiar?</p>
-    <h2 class="problem-headline">You are not the problem.<br>Your system is.</h2>
-    <ul class="problem-list reveal">
-      <li class="problem-item"><p><strong>You have started before</strong>You went hard for a few weeks, saw some progress, then life happened and you stopped completely.</p></li>
-      <li class="problem-item"><p><strong>Motivation is not enough</strong>You feel motivated on Monday. By Thursday something gets in the way. You rely on feeling like it — and that never lasts.</p></li>
-      <li class="problem-item"><p><strong>You eat well — sometimes</strong>Monday to Thursday you are on it. The weekend undoes everything. You have no system that survives a difficult week.</p></li>
-      <li class="problem-item"><p><strong>Nobody is paying attention</strong>You train alone, check in with nobody, and have no external accountability. When you skip — nothing happens.</p></li>
-    </ul>
+<!-- ── MARQUEE ──────────────────────────────────────────── -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="m-item"><em>12+</em> years training<span class="m-star">✦</span></div>
+    <div class="m-item"><span class="m-img"><img src="group.png" alt=""></span>programs from <em>&nbsp;79$</em><span class="m-star">✦</span></div>
+    <div class="m-item">weekly check-ins<span class="m-star">✦</span></div>
+    <div class="m-item"><span class="m-img"><img src="hyroxRUN.png" alt=""></span><em>24h</em> coach access<span class="m-star">✦</span></div>
+    <div class="m-item"><em>12+</em> years training<span class="m-star">✦</span></div>
+    <div class="m-item"><span class="m-img"><img src="group.png" alt=""></span>programs from <em>&nbsp;79$</em><span class="m-star">✦</span></div>
+    <div class="m-item">weekly check-ins<span class="m-star">✦</span></div>
+    <div class="m-item"><span class="m-img"><img src="hyroxRUN.png" alt=""></span><em>24h</em> coach access<span class="m-star">✦</span></div>
   </div>
-</section>
+</div>
 
-<section class="solution">
-  <div class="solution-inner">
-    <div class="solution-top reveal">
-      <div>
-        <p class="section-label" style="color: var(--gold);">The approach</p>
-        <h2 class="solution-headline">A system built around <span>your</span> life.</h2>
-      </div>
-      <div>
-        <p class="solution-body">I do not hand you a generic meal plan and a cookie-cutter program. Before we change anything, I look at what you already eat and how you already move — and we build from there.</p>
-        <p class="solution-body">Most clients see results just from fixing two or three specific things. No complete overhaul required.</p>
-      </div>
-    </div>
-    <div class="pillars reveal">
-      <div class="pillar"><div class="pillar-accent"></div><div class="pillar-num">01</div><div class="pillar-title">Training that progresses</div><p class="pillar-desc">A fully personalised program with video guides for every exercise — built around your schedule and goals. You always know what to do and exactly how to do it.</p></div>
-      <div class="pillar"><div class="pillar-accent"></div><div class="pillar-num">02</div><div class="pillar-title">Nutrition that fits real life</div><p class="pillar-desc">No banned foods. No calorie obsession. A clear framework built around what you already eat — improved, not replaced.</p></div>
-      <div class="pillar"><div class="pillar-accent"></div><div class="pillar-num">03</div><div class="pillar-title">Accountability every week</div><p class="pillar-desc">Weekly check-ins where I actually read what you write and respond specifically to your week. You are never coaching alone.</p></div>
+<!-- ── APPROACH ─────────────────────────────────────────── -->
+<section class="approach" id="coaching">
+  <h2 class="display approach-title reveal">
+    Coaching<span class="star">✦</span>with
+    <span class="l2">real accountability</span>
+  </h2>
+  <div class="mosaic reveal">
+    <div class="mo-cell mo-img mo-c1"><img src="group.png" alt="Group training session"></div>
+    <div class="mo-cell mo-circle mo-c2"><div class="disc"><span>Personalised programming</span></div></div>
+    <div class="mo-cell mo-img mo-c3"><img src="hyroxRUN.png" alt="Dalius Butkus competing"></div>
+    <div class="mo-cell mo-circle mo-c4"><div class="disc"><span>Weekly accountability</span></div></div>
+    <div class="mo-cell mo-img mo-c5"><img src="purpleChange.png" alt="Dalius Butkus rowing"></div>
+    <div class="mo-cell mo-text mo-c6">
+      <p><span class="br">[</span> I do not hand you a generic plan. I look at what you <strong>already</strong> eat and how you <strong>already</strong> move — and we build from there. Most clients see results from fixing two or three specific things. No overhaul required. <span class="br">]</span></p>
     </div>
   </div>
 </section>
 
-<section class="offer" id="offer">
-  <div class="offer-inner">
-    <p class="section-label">What is included</p>
-    <h2 class="offer-headline">Everything you need.<br><span>Nothing you don't.</span></h2>
-    <div class="offer-grid reveal">
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg></div><div><div class="offer-item-title">Personalised training program</div><p class="offer-item-desc">Built around your schedule, your gym, and your goal. Days, exercises and intensity — all tailored to you. Adjusted as you progress.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2"/></svg></div><div><div class="offer-item-title">Weekly check-in</div><p class="offer-item-desc">Training, nutrition, sleep, energy and mindset — reviewed every week. You get a personalised response within 72 hours.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div><div><div class="offer-item-title">Nutrition blueprint</div><p class="offer-item-desc">A practical framework that explains the why behind every decision. Not a meal plan — a system that works with real life.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div><div><div class="offer-item-title">Exercise video library</div><p class="offer-item-desc">Every exercise filmed and explained. You always know exactly how each movement should look and feel.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="offer-item-title">Direct coach access</div><p class="offer-item-desc">Message me directly whenever you need to. Questions answered within 24 hours. You are never on your own.</p></div></div>
-      <div class="offer-item"><div class="offer-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div><div class="offer-item-title">Progress tracking</div><p class="offer-item-desc">Track your weight and reps every session across 12 weeks. You can see exactly how much stronger you are getting.</p></div></div>
-    </div>
-    <div class="offer-price reveal">
-      <div class="pricing-options">
-        <div class="pricing-option">
-          <div>
-            <div class="pricing-option-tag">Self-guided</div>
-            <div class="pricing-option-name">Program Only</div>
-          </div>
-          <div class="pricing-option-price">$79 <span>AUD one-time</span></div>
-          <p class="pricing-option-desc">For people who are self-motivated and just need a clear, structured plan to follow. No coaching — just the tools.</p>
-          <div class="pricing-option-includes">
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Personalised training program</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Nutrition blueprint</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Exercise video library access</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Progress tracking sheet</div>
-          </div>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-secondary" target="_blank">Get the program</a>
-          <p class="pricing-option-note" style="margin-top:0.5rem;">Complete a short onboarding form.</p>
-        </div>
-        <div class="pricing-option featured">
-          <div>
-            <div class="pricing-option-tag">Early access — 3 spots only</div>
-            <div class="pricing-option-name">Full Coaching</div>
-          </div>
-          <div class="pricing-option-price">$200 <span>AUD / month</span></div>
-          <p class="pricing-option-desc">For people who want accountability, weekly feedback, and a coach paying attention every step of the way. Everything in the program — plus me.</p>
-          <div class="pricing-option-includes">
-            <div class="pricing-option-item"><span class="pcheck">✓</span><strong style="color:rgba(250,250,250,0.85)">Everything in Program Only</strong></div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>A 20-minute discovery call</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Weekly check-in — personalised response within 72 hours</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Direct coach access — questions answered within 24 hours</div>
-            <div class="pricing-option-item"><span class="pcheck">✓</span>Program adjusted every 4 weeks based on your progress</div>
-          </div>
-          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:0.25rem;">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply for a spot</a>
-            <span style="font-size:0.78rem;color:rgba(250,250,250,0.3)">Limited spots available</span>
-          </div>
-          <p class="pricing-option-note" style="margin-top:0.25rem;">Complete a short form, and I will reach out to book a call.</p>
-          <div style="padding:0.75rem 0 0;display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
-            <div class="payment-label">Payment</div>
-            <div class="payment-methods">
-              <div class="payment-method"><span>💳</span> Card</div>
-              <div class="payment-method"><span>🍎</span> Apple Pay</div>
-              <div class="payment-method"><span>🏦</span> BECS</div>
-            </div>
-            <div class="payment-note">Via Stripe.</div>
-          </div>
-        </div>
+<!-- ── FEATURES ─────────────────────────────────────────── -->
+<section class="features">
+  <div class="features-head reveal">
+    <h2 class="display features-title">Everything<br>you need<em>.</em></h2>
+    <p class="features-note"><span class="br">[</span> Nothing you don't. Every piece is built around your actual life — your schedule, your gym, your goal. <span class="br">]</span></p>
+  </div>
+  <div class="reveal">
+    <p class="fgroup-label">The system</p>
+    <div class="frow"><div class="frow-inner"><span class="frow-name">Training program</span><span class="frow-meta">Built for your schedule — adjusted as you progress</span></div></div>
+    <div class="frow"><div class="frow-inner"><span class="frow-name">Nutrition blueprint</span><span class="frow-meta">No banned foods — a framework, not a meal plan</span></div></div>
+    <div class="frow"><div class="frow-inner"><span class="frow-name">Video library</span><span class="frow-meta">Every exercise filmed &amp; explained</span></div></div>
+    <div class="frow"><div class="frow-inner"><span class="frow-name">Progress tracking</span><span class="frow-meta">Weight &amp; reps, every session, 12 weeks</span></div></div>
+    <p class="fgroup-label">The coach</p>
+    <div class="frow"><div class="frow-inner"><span class="frow-name">Weekly check-in</span><span class="frow-meta">Personal response within 72 hours</span></div></div>
+    <div class="frow"><div class="frow-inner"><span class="frow-name">Direct access</span><span class="frow-meta">Message me anytime — answered in 24h</span></div></div>
+  </div>
+</section>
+
+<!-- ── PROOF ────────────────────────────────────────────── -->
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-left reveal">
+      <span class="tag proof-tag"><span class="br">[</span> My own transformation — not a stock photo <span class="br">]</span></span>
+      <div class="display proof-word">Proof.</div>
+      <div class="proof-cards">
+        <div class="proof-card">12+ years training<small>Through every excuse you have</small></div>
+        <div class="proof-card">Cert III &amp; IV Fitness<small>Australia</small></div>
+        <div class="proof-card">Personal training licence<small>Europe</small></div>
       </div>
     </div>
+    <div class="proof-photo reveal">
+      <img src="transformation.png" alt="Dalius Butkus — before and after transformation" loading="lazy">
+    </div>
   </div>
 </section>
 
+<!-- ── ABOUT ────────────────────────────────────────────── -->
 <section class="about" id="about">
-  <div class="about-inner">
-    <div class="reveal">
-      <p class="section-label">About your coach</p>
-      <h2 class="about-headline">I have been<br>where you are.</h2>
-      <p class="about-body">I have been training seriously for over 12 years. In that time I have been through the inconsistency, the programs that did not stick, the periods where life took over. I know the difference between wanting to change and actually building the habits that make change permanent.</p>
-      <p class="about-body">I hold <strong>Cert III and IV in Fitness in Australia</strong> and a <strong>European Personal Training licence</strong>. But my real qualification is this: I have helped people who kept starting over finally stop starting over.</p>
-      <p class="about-body">My approach is simple. I work with what you already have. We do not burn everything down and rebuild from scratch. We find what is working, fix what is not, and build a system around your actual life — not a perfect version of it.</p>
-    </div>
-    <div class="about-image reveal">
-      <div class="transformation-block">
-        <img src="transformation.png" alt="Transformation — DB Coaching">
+  <h2 class="display about-h reveal">
+    I have<span class="h-img"><img src="group.png" alt="Dalius Butkus coaching"></span>been<br>
+    <span class="gold">where you are.</span>
+  </h2>
+  <div class="about-cols">
+    <div class="about-body reveal">
+      <p>I have been training seriously for over 12 years. In that time I have been through the inconsistency, the programs that did not stick, the periods where life took over. I know the difference between <strong>wanting to change</strong> and actually building the habits that make change permanent.</p>
+      <p><span class="br">[</span> My approach is simple. I work with what you already have. We find what is working, fix what is not, and build a system around your actual life — not a perfect version of it. <span class="br">]</span></p>
+      <div class="about-creds">
+        <div class="about-cred"><strong>12+ yrs</strong>Training experience</div>
+        <div class="about-cred"><strong>Cert III &amp; IV</strong>Fitness, Australia</div>
+        <div class="about-cred"><strong>PT Licence</strong>Europe</div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="forwho">
-  <div class="forwho-inner">
-    <p class="section-label">Is this for you?</p>
-    <h2 class="forwho-headline">Right for some.<br><span>Not for everyone.</span></h2>
-    <div class="forwho-grid reveal">
+    <div class="forwho reveal">
       <div class="forwho-col">
-        <h3>This is for you if</h3>
-        <ul class="forwho-list">
+        <h3>[ For you if ]</h3>
+        <ul>
           <li>You are tired of starting over and want it to finally stick</li>
           <li>You are ready to commit to the process, not just the result</li>
-          <li>You want to understand your training and nutrition, not just follow orders</li>
+          <li>You want to understand your training, not just follow orders</li>
           <li>You want a coach who actually pays attention to your week</li>
-          <li>You are open to being honest in your weekly check-in</li>
         </ul>
       </div>
       <div class="forwho-col no">
-        <h3>This is not for you if</h3>
-        <ul class="forwho-list">
+        <h3>[ Not for you if ]</h3>
+        <ul>
           <li>You want a magic solution that requires no effort</li>
           <li>You expect results without changing your habits</li>
           <li>You are not ready to invest in your health right now</li>
-          <li>You are not willing to train consistently to the schedule we agree on</li>
-          <li>You want someone to just tell you what to eat with no explanation</li>
+          <li>You want to be told what to eat with no explanation</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="process">
-  <div class="process-inner">
-    <p class="section-label">How it works</p>
-    <h2 class="process-headline">Simple from day one.</h2>
-
-    <!-- PROGRAM ONLY -->
-    <div style="margin-top:3rem;">
-      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(184,150,12,0.2);">Program only</div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;" class="reveal">
-        <div style="position:absolute;top:1.25rem;left:1.25rem;right:1.25rem;height:1px;background:rgba(184,150,12,0.3);"></div>
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <div class="step-title">Fill in the form</div>
-          <p class="step-desc">Complete the short onboarding form. Takes 5 minutes. Tells me your goals, schedule and training history.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <div class="step-title">Receive your program</div>
-          <p class="step-desc">I build your personalised program and nutrition blueprint based on your answers. Delivered within 72 hours.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <div class="step-title">Start training</div>
-          <p class="step-desc">Follow your program, track your progress, and use the exercise video library whenever you need it.</p>
-        </div>
+<!-- ── PRICING ──────────────────────────────────────────── -->
+<section class="pricing" id="pricing">
+  <h2 class="display pricing-title reveal">Start here<em>.</em></h2>
+  <div class="pricing-grid reveal">
+    <div class="pcard">
+      <div class="pcard-fold" aria-hidden="true"></div>
+      <div class="pcard-head">
+        <span class="pcard-num">[1]</span>
+        <h3 class="pcard-name">Program only</h3>
+        <span class="pcard-tag">[ Self-guided ]</span>
+      </div>
+      <ul class="pcard-list">
+        <li>Personalised training program</li>
+        <li>Nutrition blueprint</li>
+        <li>Exercise video library access</li>
+        <li>Progress tracking sheet</li>
+      </ul>
+      <div class="pcard-foot">
+        <div class="pcard-price">79$<small>/ one-time AUD</small></div>
+        <a class="pcard-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank" rel="noopener">Get it [+]</a>
       </div>
     </div>
-
-    <!-- FULL COACHING -->
-    <div style="margin-top:4rem;">
-      <div style="font-size:0.72rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(184,150,12,0.2);">Full coaching</div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;" class="reveal">
-        <div style="position:absolute;top:1.25rem;left:1.25rem;right:1.25rem;height:1px;background:rgba(184,150,12,0.3);"></div>
-        <div class="process-step">
-          <div class="step-num">1</div>
-          <div class="step-title">Fill in the form</div>
-          <p class="step-desc">Complete the onboarding form. Takes 5 minutes. Tells me who you are and what you are working toward.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">2</div>
-          <div class="step-title">Discovery call</div>
-          <p class="step-desc">A 20-minute call to talk through your goals, history and what has and has not worked before.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">3</div>
-          <div class="step-title">Your program</div>
-          <p class="step-desc">I build everything personalised to you. You receive it before day one.</p>
-        </div>
-        <div class="process-step">
-          <div class="step-num">4</div>
-          <div class="step-title">We start</div>
-          <p class="step-desc">Weekly check-ins begin. I review your progress each week and respond with specific feedback.</p>
-        </div>
+    <div class="pcard featured">
+      <div class="pcard-fold" aria-hidden="true"></div>
+      <div class="pcard-head">
+        <span class="pcard-num">[2]</span>
+        <h3 class="pcard-name">Full coaching</h3>
+        <span class="pcard-tag">[ Early access — 3 spots only ]</span>
+      </div>
+      <ul class="pcard-list">
+        <li><strong>Everything in Program Only</strong></li>
+        <li>A 20-minute discovery call</li>
+        <li>Weekly check-in — personal response within 72 hours</li>
+        <li>Direct coach access — answered within 24 hours</li>
+        <li>Program adjusted every 4 weeks</li>
+      </ul>
+      <div class="pcard-foot">
+        <div class="pcard-price">200$<small>/ month AUD</small></div>
+        <a class="pcard-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank" rel="noopener">Apply [+]</a>
+        <p class="pcard-note">Card · Apple Pay · BECS — via Stripe</p>
       </div>
     </div>
-
+  </div>
+  <div class="process reveal">
+    <div class="pstep"><span class="pstep-n">[1]</span><div class="pstep-t">Fill the form</div><p>Takes 5 minutes. Free. Tells me your goal, schedule and history.</p></div>
+    <div class="pstep"><span class="pstep-n">[2]</span><div class="pstep-t">Discovery call</div><p>20 minutes, coaching applicants only. We talk through what has and hasn't worked.</p></div>
+    <div class="pstep"><span class="pstep-n">[3]</span><div class="pstep-t">Your program</div><p>Built personally for you. Delivered within 72 hours.</p></div>
+    <div class="pstep"><span class="pstep-n">[4]</span><div class="pstep-t">We start</div><p>You train. I watch the data. Check-ins begin week one.</p></div>
   </div>
 </section>
 
-<section class="cta-section">
-  <div class="cta-inner reveal">
-    <h2 class="cta-headline">Ready to stop starting over?</h2>
-    <p class="cta-sub">Early access coaching from $200 AUD/month. Or get the program only for $79. Fill in the form — it takes 5 minutes and costs nothing.</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" class="btn-primary" target="_blank">Apply now</a>
-    <p class="cta-fine" style="color: rgba(250,250,250,0.45);">Online coaching · Available worldwide</p>
+<!-- ── CTA ──────────────────────────────────────────────── -->
+<section class="cta">
+  <div class="cta-bg"><img src="hyroxRUN.png" alt="" aria-hidden="true"></div>
+  <div class="cta-inner">
+    <span class="tag cta-tag"><span class="br">[</span> Free to apply — takes 5 minutes <span class="br">]</span></span>
+    <h2 class="display cta-h">Make it stick<br><span class="gold">this time.</span></h2>
+    <a class="cta-circle reveal" href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank" rel="noopener">Apply now [+]</a>
+    <span class="tag cta-fine">Online coaching · Available worldwide</span>
   </div>
 </section>
 
+<!-- ── FOOTER ───────────────────────────────────────────── -->
 <footer>
-  <div class="footer-logo">DB <span>Coaching</span></div>
-  <div class="footer-links">
-    <a href="#about">About</a>
-    <a href="#offer">Coaching</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank">Apply</a>
+  <div class="f-row1">
+    <div class="f-cell"><span class="f-logo">DB<span>&nbsp;Coaching</span></span></div>
+    <div class="f-cell"><a class="f-link" href="#about">About</a></div>
+    <div class="f-cell"><a class="f-link" href="#pricing">Coaching</a></div>
+    <div class="f-cell"><a class="f-link" href="https://instagram.com/dalius_butkus" target="_blank" rel="noopener">Instagram</a></div>
+    <a class="f-cell f-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg></a>
   </div>
-  <div class="footer-ig">
-    <a href="https://instagram.com/dalius_butkus" target="_blank">
-      <svg class="ig-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-      </svg>
-      @dalius_butkus
-    </a>
+  <div class="f-row2">
+    <div class="display f-statement">You are one<br>decision <em>away.</em></div>
+    <div class="f-meta">
+      <a href="https://instagram.com/dalius_butkus" target="_blank" rel="noopener">@dalius_butkus</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfp8sDRlfeJSueQcIv-a7yMSvn82xwIOUcstBxTAEajFsXt2w/viewform" target="_blank" rel="noopener">Apply for coaching</a>
+      <p>© 2026 DB Coaching. All rights reserved.</p>
+    </div>
   </div>
 </footer>
 
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth' });
-    });
+const observer = new IntersectionObserver(
+  entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
   });
+});
 </script>
 </body>
 </html>
